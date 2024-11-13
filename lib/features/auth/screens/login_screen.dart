@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'personal_data_page.dart';
+import 'register_screen.dart';
+import '../../../features/home/screens/home_screen.dart';
 
-class RegisterScreen extends StatelessWidget {
-  const RegisterScreen({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class RegisterScreen extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
-          'Registrasi',
+          'Masuk',
           style: GoogleFonts.poppins(
             fontSize: 18,
             fontWeight: FontWeight.w600,
@@ -84,45 +85,18 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            // Confirm Password Input Field
-            TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: const Color(0xFFF5F5F5),
-                hintText: 'Konfirmasi kata sandi anda',
-                hintStyle: GoogleFonts.poppins(
-                  color: Colors.grey,
-                  fontSize: 14,
-                ),
-                prefixIcon: const Icon(Icons.lock_outline, color: Colors.grey),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
             const SizedBox(height: 30),
-            // Register Button
+            // Login Button
             SizedBox(
               width: double.infinity,
               height: 45,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     PageRouteBuilder(
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          const PersonalDataScreen(),
+                          const HomeScreen(),
                       transitionsBuilder:
                           (context, animation, secondaryAnimation, child) {
                         const begin = Offset(1.0, 0.0);
@@ -151,7 +125,7 @@ class RegisterScreen extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  'Selanjutnya',
+                  'Masuk',
                   style: GoogleFonts.poppins(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -160,12 +134,12 @@ class RegisterScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Login Link
+            // Registration Link
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'Sudah punya akun? ',
+                  'Belum punya akun? ',
                   style: GoogleFonts.poppins(
                     color: const Color(0xFF181C1D),
                     fontSize: 14,
@@ -173,10 +147,33 @@ class RegisterScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            const RegisterScreen(),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                          const begin = Offset(1.0, 0.0);
+                          const end = Offset.zero;
+                          const curve = Curves.easeInOut;
+
+                          var tween = Tween(begin: begin, end: end)
+                              .chain(CurveTween(curve: curve));
+
+                          var offsetAnimation = animation.drive(tween);
+
+                          return SlideTransition(
+                            position: offsetAnimation,
+                            child: child,
+                          );
+                        },
+                        transitionDuration: const Duration(milliseconds: 300),
+                      ),
+                    );
                   },
                   child: Text(
-                    'Masuk',
+                    'Registrasi',
                     style: GoogleFonts.poppins(
                       color: const Color(0xFFFCD65B),
                       fontSize: 14,

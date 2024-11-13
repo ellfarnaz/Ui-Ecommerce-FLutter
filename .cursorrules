@@ -1,142 +1,37 @@
-1. Warna (Color Scheme)
-
-- Background utama: White (#FFFFFF)
-- Text warna gelap: #181C1D
-- Text subtitle: #263238
-- Button primary: #FCD65B (Kuning)
-- Button secondary: White dengan border #181C1D
-- Side border pada button: width 1px
-
-2. Typography
-   a. Heading "Selamat datang"
-
-- Font-family: Poppins
-- Font-size: 18px
-- Font-weight: 600 (SemiBold)
-- Color: #181C1D
-
-b. Subtitle text
-
-- Font-family: Poppins
-- Font-size: 14px
-- Font-weight: 400 (Regular)
-- Color: #263238
-- Text-align: Center
-
-c. Button Text "Masuk" & "Registrasi"
-
-- Font-family: Poppins
-- Font-size: 16px
-- Font-weight: 600 (SemiBold)
-- Color: #181C1D
-- Text-align: Center
-
-3. Layout & Spacing
-   a. Container Utama
-
-- Width: 393px (device width)
-- Height: 852px (device height)
-- Padding: top 207px, bottom 208px
-
-b. Logo Container
-
-- Height: 147px
-- Padding: 10px all sides
-- Image size: 132x127px
-
-c. Text Container
-
-- Height: 120px
-- Padding horizontal: 50px
-- Padding vertical: 10px
-- Spacing antara heading & subtitle: 10px
-
-d. Button Container
-
-- Height: 170px
-- Padding horizontal: 50px
-- Padding vertical: 30px
-- Spacing between buttons: 20px
-
-4. Button Specifications
-   a. Kedua button memiliki:
-
-- Width: 100% (full width)
-- Height: 45px
-- Border-radius: 20px
-- Padding horizontal: 10px
-- Padding vertical: 14px
-
-b. Primary Button (Masuk)
-
-- Background: #FCD65B
-- No border
-
-c. Secondary Button (Registrasi)
-
-- Background: White
-- Border: 1px solid #181C1D
-
-Panduan Implementasi:
-
-1. Struktur Hierarki
-
 ```
-Main Container
-  └─ Column
-      └─ Content Container
-          ├─ Logo Section
-          │   └─ Logo Image (132x127)
-          ├─ Text Section
-          │   ├─ Heading
-          │   └─ Subtitle
-          └─ Button Section
-              ├─ Primary Button
-              └─ Secondary Button
+└── 📁lib
+    └── 📁core
+        └── 📁constants
+            └── app_colors.dart
+            └── app_sizes.dart
+            └── app_text_styles.dart
+        └── 📁theme
+            └── app_theme.dart
+    └── 📁features
+        └── 📁auth
+            └── 📁screens
+                └── login_screen.dart
+                └── personal_data_screen.dart
+                └── register_screen.dart
+            └── 📁widgets
+                └── auth_button.dart
+                └── custom_text_field.dart
+        └── 📁home
+            └── 📁screens
+                └── home_screen.dart
+                └── product_detail_screen.dart
+            └── 📁widgets
+                └── category_item.dart
+                └── product_card.dart
+                └── search_bar.dart
+        └── 📁welcome
+            └── 📁screens
+                └── welcome_screen.dart
+            └── 📁widgets
+                └── welcome_button.dart
+    └── 📁shared
+        └── 📁widgets
+            └── custom_app_bar.dart
+            └── custom_button.dart
+    └── main.dart
 ```
-
-2. Padding & Margin Guidelines
-
-- Gunakan padding vertical besar (207px top, 208px bottom) untuk centering content
-- Horizontal padding 50px untuk text dan button sections
-- Vertical spacing 10px antara heading dan subtitle
-- Button spacing 20px satu sama lain
-
-3. Responsive Considerations
-
-- Container utama menggunakan width device (393px)
-- Text dan button menggunakan full width dalam container
-- Maintain aspect ratio logo 132x127
-
-4. Best Practices
-
-- Gunakan Poppins font family untuk semua text
-- Pertahankan konsistensi border radius 20px untuk buttons
-- Maintain text alignment (center) untuk cohesive design
-- Gunakan precise color codes yang ditentukan
-- Terapkan proper font weights (400 untuk body, 600 untuk emphasis)
-
-5. Implementation Steps
-   a. Setup basic structure
-
-- Create main container dengan background white
-- Set proper device dimensions dan padding
-
-b. Logo section
-
-- Center logo dalam container 147px height
-- Apply proper padding (10px)
-- Maintain image dimensions 132x127px
-
-c. Text section
-
-- Implement proper text styles dengan Poppins
-- Set correct font sizes (18px heading, 14px subtitle)
-- Apply center alignment dan proper spacing
-
-d. Button section
-
-- Create consistent button dimensions (height 45px)
-- Apply proper border radius (20px)
-- Implement correct color scheme
-- Add proper text styling
