@@ -1,91 +1,101 @@
 import 'package:flutter/material.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
-import '../../../shared/widgets/custom_button.dart';
+import '../widgets/welcome_button.dart';
 import '../../auth/screens/login_screen.dart';
 import '../../auth/screens/register_screen.dart';
+import '../../../core/utils/page_transition.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Dapatkan ukuran layar
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: Container(
-          width: 393,
-          height: 852,
-          padding: const EdgeInsets.only(top: 207, bottom: 208),
-          child: Column(
-            children: [
-              // Logo Section
-              Container(
-                height: 147,
-                padding: const EdgeInsets.all(10),
-                child: const Icon(
-                  Icons.account_circle_rounded,
-                  size: 127,
-                  color: AppColors.textDark,
+        child: SingleChildScrollView(
+          // Tambahkan ScrollView untuk menghindari overflow
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: size.height -
+                  MediaQuery.of(context).padding.top -
+                  MediaQuery.of(context).padding.bottom,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Logo Section
+                Container(
+                  padding: EdgeInsets.all(size.width * 0.05),
+                  child: Icon(
+                    Icons.account_circle_rounded,
+                    size: size.width * 0.3, // Responsive icon size
+                    color: AppColors.textDark,
+                  ),
                 ),
-              ),
 
-              // Text Section
-              Container(
-                height: 120,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 50,
-                  vertical: 10,
+                // Text Section
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: size.width * 0.1,
+                    vertical: size.height * 0.02,
+                  ),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Selamat datang',
+                        style: AppTextStyles.heading(context),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: size.height * 0.02),
+                      Text(
+                        'Belanja dengan percaya diri, karena kami menawarkan berbagai metode pembayaran yang aman dan terjamin.',
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.subtitle(context),
+                      ),
+                    ],
+                  ),
                 ),
-                child: Column(
-                  children: [
-                    Text(
-                      'Selamat datang',
-                      style: AppTextStyles.heading,
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'Belanja dengan percaya diri, karena kami menawarkan berbagai metode pembayaran yang aman dan terjamin.',
-                      textAlign: TextAlign.center,
-                      style: AppTextStyles.subtitle,
-                    ),
-                  ],
-                ),
-              ),
 
-              // Button Section
-              Container(
-                height: 170,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 50,
-                  vertical: 30,
-                ),
-                child: Column(
-                  children: [
-                    CustomButton(
-                      text: 'Masuk',
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LoginScreen(),
+                // Button Section
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: size.width * 0.1,
+                    vertical: size.height * 0.03,
+                  ),
+                  child: Column(
+                    children: [
+                      WelcomeButton(
+                        text: 'Masuk',
+                        onPressed: () => Navigator.push(
+                          context,
+                          SlidePageRoute(
+                            page: const LoginScreen(),
+                            direction: AxisDirection.left,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 20),
-                    CustomButton(
-                      text: 'Registrasi',
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const RegisterScreen(),
+                      SizedBox(height: size.height * 0.02),
+                      WelcomeButton(
+                        text: 'Registrasi',
+                        onPressed: () => Navigator.push(
+                          context,
+                          SlidePageRoute(
+                            page: const RegisterScreen(),
+                            direction: AxisDirection.left,
+                          ),
                         ),
+                        isPrimary: false,
                       ),
-                      isPrimary: false,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

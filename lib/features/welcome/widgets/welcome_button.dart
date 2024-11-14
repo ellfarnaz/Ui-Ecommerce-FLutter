@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../shared/widgets/custom_button.dart';
+import '../../../core/constants/app_sizes.dart';
 
 class WelcomeButton extends StatelessWidget {
   final String text;
@@ -19,7 +20,7 @@ class WelcomeButton extends StatelessWidget {
       text: text,
       onPressed: onPressed,
       isPrimary: isPrimary,
-      height: 45,
+      height: AppSizes.buttonHeight,
     );
   }
 }

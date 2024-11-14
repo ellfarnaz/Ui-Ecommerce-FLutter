@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../core/constants/app_colors.dart';
+import '../../../core/constants/app_text_styles.dart';
+import '../widgets/auth_button.dart';
+import '../widgets/custom_text_field.dart';
+import '../../../core/utils/page_transition.dart';
+import '../../../features/home/screens/home_screen.dart';
 
 class PersonalDataScreen extends StatefulWidget {
   const PersonalDataScreen({super.key});
@@ -26,16 +32,12 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Color(0xFF181C1D)),
+          icon: const Icon(Icons.arrow_back, color: AppColors.textDark),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           'Data pribadi',
-          style: GoogleFonts.poppins(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: const Color(0xFF181C1D),
-          ),
+          style: AppTextStyles.heading(context),
         ),
         centerTitle: true,
       ),
@@ -47,46 +49,23 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
             // Nama Lengkap Label
             Text(
               'Nama Lengkap',
-              style: GoogleFonts.poppins(
-                fontSize: 14,
+              style: AppTextStyles.body(context).copyWith(
                 fontWeight: FontWeight.w500,
-                color: const Color(0xFF181C1D),
               ),
             ),
             const SizedBox(height: 8),
             // Nama Lengkap Input
-            TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: const Color(0xFFF5F5F5),
-                hintText: 'Masukkan nama lengkap anda',
-                hintStyle: GoogleFonts.poppins(
-                  color: Colors.grey,
-                  fontSize: 14,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-              ),
+            const CustomTextField(
+              hintText: 'Masukkan nama lengkap anda',
+              prefixIcon: Icons.person_outline,
             ),
             const SizedBox(height: 20),
 
             // Jenis Kelamin Label
             Text(
               'Jenis kelamin',
-              style: GoogleFonts.poppins(
-                fontSize: 14,
+              style: AppTextStyles.body(context).copyWith(
                 fontWeight: FontWeight.w500,
-                color: const Color(0xFF181C1D),
               ),
             ),
             const SizedBox(height: 8),
@@ -95,7 +74,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(horizontal: 12),
               decoration: BoxDecoration(
-                color: const Color(0xFFF5F5F5),
+                color: AppColors.inputBackground,
                 borderRadius: BorderRadius.circular(15),
               ),
               child: DropdownButtonHideUnderline(
@@ -103,9 +82,12 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                   value: selectedGender,
                   hint: Text(
                     'Jenis kelamin',
-                    style: GoogleFonts.poppins(
-                      color: Colors.grey,
-                      fontSize: 14,
+                    style: AppTextStyles.getStyle(
+                      context,
+                      GoogleFonts.poppins(
+                        color: Colors.grey,
+                        fontSize: 14,
+                      ),
                     ),
                   ),
                   items: ['Laki-laki', 'Perempuan']
@@ -113,10 +95,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                             value: value,
                             child: Text(
                               value,
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                color: const Color(0xFF181C1D),
-                              ),
+                              style: AppTextStyles.body(context),
                             ),
                           ))
                       .toList(),
@@ -135,10 +114,8 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
             // Tanggal Lahir Label
             Text(
               'Tanggal lahir',
-              style: GoogleFonts.poppins(
-                fontSize: 14,
+              style: AppTextStyles.body(context).copyWith(
                 fontWeight: FontWeight.w500,
-                color: const Color(0xFF181C1D),
               ),
             ),
             const SizedBox(height: 8),
@@ -147,11 +124,14 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
               controller: dateController,
               decoration: InputDecoration(
                 filled: true,
-                fillColor: const Color(0xFFF5F5F5),
+                fillColor: AppColors.inputBackground,
                 hintText: 'dd/mm/yyyy',
-                hintStyle: GoogleFonts.poppins(
-                  color: Colors.grey,
-                  fontSize: 14,
+                hintStyle: AppTextStyles.getStyle(
+                  context,
+                  GoogleFonts.poppins(
+                    color: Colors.grey,
+                    fontSize: 14,
+                  ),
                 ),
                 suffixIcon:
                     const Icon(Icons.calendar_today, color: Colors.grey),
@@ -168,6 +148,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                   borderSide: BorderSide.none,
                 ),
               ),
+              style: AppTextStyles.body(context),
               readOnly: true,
               onTap: () async {
                 final DateTime? picked = await showDatePicker(
@@ -191,63 +172,32 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
             // Nomor HP Label
             Text(
               'Nomor Hp',
-              style: GoogleFonts.poppins(
-                fontSize: 14,
+              style: AppTextStyles.body(context).copyWith(
                 fontWeight: FontWeight.w500,
-                color: const Color(0xFF181C1D),
               ),
             ),
             const SizedBox(height: 8),
             // Nomor HP Input
-            TextField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: const Color(0xFFF5F5F5),
-                hintText: '+62',
-                hintStyle: GoogleFonts.poppins(
-                  color: Colors.grey,
-                  fontSize: 14,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(15),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-              keyboardType: TextInputType.phone,
+            CustomTextField(
+              hintText: '+62',
+              prefixIcon: Icons.phone_outlined,
+              controller: TextEditingController(),
             ),
             const Spacer(),
 
             // Registrasi Button
-            SizedBox(
-              width: double.infinity,
-              height: 45,
-              child: ElevatedButton(
-                onPressed: () {
-                  // Handle registration
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFCD65B),
-                  foregroundColor: const Color(0xFF181C1D),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+            AuthButton(
+              text: 'Registrasi',
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  SlidePageRoute(
+                    page: const HomeScreen(),
+                    direction: AxisDirection.left,
                   ),
-                ),
-                child: Text(
-                  'Registrasi',
-                  style: GoogleFonts.poppins(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
+                  (route) => false,
+                );
+              },
             ),
           ],
         ),

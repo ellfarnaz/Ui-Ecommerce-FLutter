@@ -4,6 +4,8 @@ import '../widgets/category_item.dart';
 import '../widgets/product_card.dart';
 import '../widgets/search_bar.dart';
 import '../../../core/constants/app_colors.dart';
+import '../../../core/constants/app_sizes.dart';
+import '../../../core/constants/app_text_styles.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -151,18 +153,24 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 TextSpan(
                   text: 'Selamat datang, ',
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.textDark,
+                  style: AppTextStyles.getStyle(
+                    context,
+                    GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.textDark,
+                    ),
                   ),
                 ),
                 TextSpan(
-                  text: 'Libur',
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textDark,
+                  text: 'Ellfarnaz',
+                  style: AppTextStyles.getStyle(
+                    context,
+                    GoogleFonts.poppins(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textDark,
+                    ),
                   ),
                 ),
               ],
@@ -210,11 +218,7 @@ class _HomeScreenState extends State<HomeScreen>
           padding: const EdgeInsets.only(left: 20.0, bottom: 15.0),
           child: Text(
             'Produk tersedia',
-            style: GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textDark,
-            ),
+            style: AppTextStyles.heading(context),
           ),
         ),
       ],
@@ -268,67 +272,86 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            _buildHeader(),
-            _buildCategories(),
-            Expanded(
-              child: TabBarView(
-                controller: _tabController,
-                children: List.generate(categories.length, (pageIndex) {
-                  final filteredProducts = _searchQuery.isEmpty
-                      ? categoryProducts[pageIndex] ?? []
-                      : (categoryProducts[pageIndex] ?? []).where((product) {
-                          final name = product['name'].toString().toLowerCase();
-                          final price =
-                              product['price'].toString().toLowerCase();
-                          final query = _searchQuery.toLowerCase();
-                          return name.contains(query) || price.contains(query);
-                        }).toList();
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return OrientationBuilder(
+          builder: (context, orientation) {
+            return Scaffold(
+              backgroundColor: Colors.white,
+              body: SafeArea(
+                child: Column(
+                  children: [
+                    _buildHeader(),
+                    _buildCategories(),
+                    Expanded(
+                      child: TabBarView(
+                        controller: _tabController,
+                        children: List.generate(categories.length, (pageIndex) {
+                          final filteredProducts = _searchQuery.isEmpty
+                              ? categoryProducts[pageIndex] ?? []
+                              : (categoryProducts[pageIndex] ?? [])
+                                  .where((product) {
+                                  final name =
+                                      product['name'].toString().toLowerCase();
+                                  final price =
+                                      product['price'].toString().toLowerCase();
+                                  final query = _searchQuery.toLowerCase();
+                                  return name.contains(query) ||
+                                      price.contains(query);
+                                }).toList();
 
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: filteredProducts.isEmpty
-                        ? Center(
-                            child: Text(
-                              'Produk tidak ditemukan',
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                color: Colors.grey,
-                              ),
-                            ),
-                          )
-                        : GridView.builder(
-                            padding: const EdgeInsets.only(bottom: 20),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 0.8,
-                              crossAxisSpacing: 15,
-                              mainAxisSpacing: 15,
-                            ),
-                            itemCount: filteredProducts.length,
-                            itemBuilder: (context, index) {
-                              final product = filteredProducts[index];
-                              return ProductCard(
-                                imageUrl: product['image'],
-                                name: product['name'],
-                                price: product['price'],
-                                category: categories[pageIndex]['label'],
-                              );
-                            },
-                          ),
-                  );
-                }),
+                          return Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: filteredProducts.isEmpty
+                                ? Center(
+                                    child: Text(
+                                      'Produk tidak ditemukan',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 14,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  )
+                                : GridView.builder(
+                                    padding: const EdgeInsets.only(bottom: 20),
+                                    gridDelegate:
+                                        SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount:
+                                          orientation == Orientation.portrait
+                                              ? 2
+                                              : 4,
+                                      childAspectRatio:
+                                          orientation == Orientation.portrait
+                                              ? 0.8
+                                              : 1.0,
+                                      crossAxisSpacing: AppSizes.paddingM,
+                                      mainAxisSpacing: AppSizes.paddingM,
+                                    ),
+                                    itemCount: filteredProducts.length,
+                                    itemBuilder: (context, index) {
+                                      final product = filteredProducts[index];
+                                      return ProductCard(
+                                        imageUrl: product['image'],
+                                        name: product['name'],
+                                        price: product['price'],
+                                        category: categories[pageIndex]
+                                            ['label'],
+                                      );
+                                    },
+                                  ),
+                          );
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+              bottomNavigationBar: _buildBottomNavigationBar(),
+            );
+          },
+        );
+      },
     );
   }
 

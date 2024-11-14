@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import '../../../core/constants/app_sizes.dart';
+import '../../../core/constants/app_text_styles.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String name;
@@ -122,11 +123,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           ),
                           child: Text(
                             widget.category.toUpperCase(),
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xFF181C1D),
-                            ),
+                            style: AppTextStyles.subtitle(context),
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -134,11 +131,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         // Product Name
                         Text(
                           widget.name,
-                          style: GoogleFonts.poppins(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w600,
-                            color: const Color(0xFF181C1D),
-                          ),
+                          style: AppTextStyles.productTitle(context),
                         ),
                         const SizedBox(height: 16),
 
@@ -151,11 +144,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               maxLines: _isExpanded ? null : 8,
                               overflow:
                                   _isExpanded ? null : TextOverflow.ellipsis,
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                color: const Color(0xFF263238),
-                                height: 1.5,
-                              ),
+                              style: AppTextStyles.body(context),
                             ),
                             if (!_isExpanded) ...[
                               const SizedBox(height: 8),
@@ -167,11 +156,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 },
                                 child: Text(
                                   'Baca selengkapnya',
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color(0xFF181C1D),
-                                  ),
+                                  style: AppTextStyles.buttonText(context),
                                 ),
                               ),
                             ],
@@ -209,39 +194,27 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     children: [
                       Text(
                         'HARGA',
-                        style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
+                        style: AppTextStyles.subtitle(context),
                       ),
                       Text(
                         widget.price,
-                        style: GoogleFonts.poppins(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
+                        style: AppTextStyles.productPrice(context),
                       ),
                     ],
                   ),
 
                   // Add to Cart Button
                   Container(
-                    height: 45,
+                    height: AppSizes.buttonHeight,
                     decoration: BoxDecoration(
                       color: const Color(0xFFFCD65B),
-                      borderRadius: BorderRadius.circular(25),
+                      borderRadius: BorderRadius.circular(AppSizes.radiusXXL),
                     ),
                     child: TextButton(
                       onPressed: () {},
                       child: Text(
                         '+ Keranjang',
-                        style: GoogleFonts.poppins(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: const Color(0xFF181C1D),
-                        ),
+                        style: AppTextStyles.buttonText(context),
                       ),
                     ),
                   ),

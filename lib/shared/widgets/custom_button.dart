@@ -33,7 +33,10 @@ class CustomButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              child: Text(text, style: AppTextStyles.buttonText),
+              child: Text(
+                text,
+                style: AppTextStyles.buttonText(context),
+              ),
             )
           : OutlinedButton(
               onPressed: onPressed,
@@ -44,7 +47,10 @@ class CustomButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              child: Text(text, style: AppTextStyles.buttonText),
+              child: Text(
+                text,
+                style: AppTextStyles.buttonText(context),
+              ),
             ),
     );
   }

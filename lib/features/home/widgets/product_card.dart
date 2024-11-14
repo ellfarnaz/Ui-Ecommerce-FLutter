@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_sizes.dart';
+import '../../../core/constants/app_text_styles.dart';
 import '../screens/product_detail_screen.dart';
 
 class ProductCard extends StatelessWidget {
@@ -21,6 +21,7 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final String uniqueTag =
         'product-$name-${DateTime.now().millisecondsSinceEpoch}';
 
@@ -33,12 +34,18 @@ class ProductCard extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSizes.radiusL),
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildProductImage(),
-              _buildProductInfo(),
-            ],
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: size.height * 0.3,
+              minHeight: size.height * 0.2,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildProductImage(),
+                _buildProductInfo(context),
+              ],
+            ),
           ),
         ),
       ),
@@ -48,7 +55,7 @@ class ProductCard extends StatelessWidget {
   Widget _buildProductImage() {
     return Expanded(
       child: ClipRRect(
-        borderRadius: const BorderRadius.vertical(
+        borderRadius: BorderRadius.vertical(
           top: Radius.circular(AppSizes.radiusL),
         ),
         child: CachedNetworkImage(
@@ -62,30 +69,22 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildProductInfo() {
+  Widget _buildProductInfo(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(AppSizes.paddingM),
+      padding: EdgeInsets.all(AppSizes.paddingM),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             name,
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              fontWeight: FontWeight.w500,
-              color: AppColors.textDark,
-            ),
+            style: AppTextStyles.subtitle(context),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
-          const SizedBox(height: AppSizes.paddingXS),
+          SizedBox(height: AppSizes.paddingXS),
           Text(
             price,
-            style: GoogleFonts.poppins(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textDark,
-            ),
+            style: AppTextStyles.subtitle(context),
           ),
         ],
       ),
@@ -106,12 +105,12 @@ class ProductCard extends StatelessWidget {
   Widget _buildErrorWidget(BuildContext context, String url, dynamic error) {
     return Container(
       color: Colors.grey[200],
-      child: const Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.error_outline, color: Colors.grey, size: 32),
+          const Icon(Icons.error_outline, color: Colors.grey, size: 32),
           SizedBox(height: AppSizes.paddingS),
-          Text(
+          const Text(
             'Gambar tidak tersedia',
             style: TextStyle(color: Colors.grey, fontSize: 12),
           ),

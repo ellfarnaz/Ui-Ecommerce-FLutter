@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/constants/app_colors.dart';
+import '../../../core/constants/app_sizes.dart';
 
 class CustomSearchBar extends StatelessWidget {
   final TextEditingController controller;
@@ -15,14 +16,15 @@ class CustomSearchBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: AppSizes.searchBarHeight,
       decoration: BoxDecoration(
         color: AppColors.white,
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(AppSizes.radiusXXL),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 2,
-            blurRadius: 10,
+            spreadRadius: AppSizes.paddingS,
+            blurRadius: AppSizes.paddingXL,
             offset: const Offset(0, 1),
           ),
         ],
@@ -47,7 +49,7 @@ class CustomSearchBar extends StatelessWidget {
                 )
               : null,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(30),
+            borderRadius: BorderRadius.circular(AppSizes.radiusXXL),
             borderSide: BorderSide.none,
           ),
           filled: true,
