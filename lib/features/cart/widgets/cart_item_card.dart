@@ -101,7 +101,7 @@ class CartItemCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      item.price,
+                      item.totalPrice,
                       style: AppTextStyles.body(context).copyWith(
                         fontWeight: FontWeight.w500,
                         fontSize: 14.sp,
@@ -110,25 +110,41 @@ class CartItemCard extends StatelessWidget {
                     // Quantity Controls
                     Container(
                       decoration: BoxDecoration(
-                        color:
-                            const Color(0xFFF8F5F2), // Background color #F8F5F2
+                        color: const Color(0xFFF8F5F2),
                         borderRadius: BorderRadius.circular(4.r),
                       ),
                       child: Row(
                         children: [
                           // Tombol Minus
-                          Container(
-                            width: 32.w,
-                            height: 32.w,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
+                          Material(
+                            color: item.quantity > 1
+                                ? Colors.grey[300]
+                                : Colors.grey[200],
+                            borderRadius: BorderRadius.circular(4.r),
+                            child: InkWell(
                               borderRadius: BorderRadius.circular(4.r),
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.remove,
-                                size: 16.w,
-                                color: Colors.black,
+                              splashFactory: InkRipple.splashFactory,
+                              splashColor: Colors.black.withOpacity(0.1),
+                              highlightColor: Colors.black.withOpacity(0.05),
+                              onTap: item.quantity > 1
+                                  ? () async {
+                                      await Future.delayed(
+                                          const Duration(milliseconds: 100));
+                                      onUpdateQuantity(item.quantity - 1);
+                                    }
+                                  : null,
+                              child: SizedBox(
+                                width: 32.w,
+                                height: 32.w,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.remove,
+                                    size: 16.w,
+                                    color: item.quantity > 1
+                                        ? Colors.black
+                                        : Colors.grey,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -136,8 +152,7 @@ class CartItemCard extends StatelessWidget {
                           Container(
                             width: 32.w,
                             height: 32.w,
-                            color: Colors
-                                .transparent, // Ubah ke transparent agar background parent terlihat
+                            color: Colors.transparent,
                             alignment: Alignment.center,
                             child: Text(
                               item.quantity.toString(),
@@ -148,18 +163,29 @@ class CartItemCard extends StatelessWidget {
                             ),
                           ),
                           // Tombol Plus
-                          Container(
-                            width: 32.w,
-                            height: 32.w,
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
+                          Material(
+                            color: AppColors.primary,
+                            borderRadius: BorderRadius.circular(4.r),
+                            child: InkWell(
                               borderRadius: BorderRadius.circular(4.r),
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.add,
-                                size: 16.w,
-                                color: Colors.black,
+                              splashFactory: InkRipple.splashFactory,
+                              splashColor: Colors.black.withOpacity(0.1),
+                              highlightColor: Colors.black.withOpacity(0.05),
+                              onTap: () async {
+                                await Future.delayed(
+                                    const Duration(milliseconds: 100));
+                                onUpdateQuantity(item.quantity + 1);
+                              },
+                              child: SizedBox(
+                                width: 32.w,
+                                height: 32.w,
+                                child: Center(
+                                  child: Icon(
+                                    Icons.add,
+                                    size: 16.w,
+                                    color: Colors.black,
+                                  ),
+                                ),
                               ),
                             ),
                           ),

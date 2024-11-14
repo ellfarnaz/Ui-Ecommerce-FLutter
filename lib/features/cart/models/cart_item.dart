@@ -14,6 +14,26 @@ class CartItem {
     this.quantity = 1,
   });
 
+  double get numericPrice {
+    String cleanPrice = price.replaceAll(RegExp(r'[^0-9]'), '');
+    return double.parse(cleanPrice);
+  }
+
+  String _formatNumber(double number) {
+    RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
+    String result = number.toStringAsFixed(0);
+    return result.replaceAllMapped(reg, (Match match) => '${match[1]}.');
+  }
+
+  String get totalPrice {
+    double total = numericPrice * quantity;
+    return 'Rp ${_formatNumber(total)}';
+  }
+
+  String get formattedPrice {
+    return 'Rp ${_formatNumber(numericPrice)}';
+  }
+
   CartItem copyWith({
     String? name,
     String? price,

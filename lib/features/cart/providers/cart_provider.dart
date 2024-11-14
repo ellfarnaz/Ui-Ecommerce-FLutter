@@ -42,14 +42,10 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateQuantity(CartItem item, int quantity) {
+  void updateQuantity(CartItem item, int newQuantity) {
     final index = _items.indexOf(item);
-    if (index >= 0) {
-      if (quantity > 0) {
-        _items[index] = _items[index].copyWith(quantity: quantity);
-      } else {
-        _items.removeAt(index);
-      }
+    if (index != -1) {
+      _items[index] = item.copyWith(quantity: newQuantity);
       notifyListeners();
     }
   }

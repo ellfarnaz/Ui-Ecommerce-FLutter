@@ -145,16 +145,26 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 ),
                 leading: Padding(
                   padding: EdgeInsets.only(left: 20.w, top: 20.h),
-                  child: GestureDetector(
-                    onTap: () => Navigator.pop(context),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.primary,
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
-                      child: const Icon(
-                        Icons.arrow_back,
-                        color: AppColors.textDark,
+                  child: Material(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.circular(12.r),
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(12.r),
+                      splashFactory: InkRipple.splashFactory,
+                      splashColor: Colors.black.withOpacity(0.1),
+                      highlightColor: Colors.black.withOpacity(0.05),
+                      onTap: () async {
+                        await Future.delayed(const Duration(milliseconds: 100));
+                        Navigator.pop(context);
+                      },
+                      child: Container(
+                        width: 40.w,
+                        height: 40.w,
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: AppColors.textDark,
+                          size: 24.w,
+                        ),
                       ),
                     ),
                   ),
@@ -195,7 +205,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             widget.category[0].toUpperCase() +
                                 widget.category.substring(1).toLowerCase(),
                             style: AppTextStyles.subtitle(context).copyWith(
-                              fontSize: 10.sp,
+                              fontSize: 12.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
