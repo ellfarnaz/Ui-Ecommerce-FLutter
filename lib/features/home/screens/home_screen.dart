@@ -7,6 +7,9 @@ import '../widgets/search_bar.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_sizes.dart';
 import '../../../core/constants/app_text_styles.dart';
+// import '../../../features/cart/screens/cart_screen.dart';
+// import '../../../features/history/screens/history_screen.dart';
+// import '../../../features/profile/screens/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,104 +32,51 @@ class _HomeScreenState extends State<HomeScreen>
     {'icon': Icons.headphones, 'label': 'Aksesoris'},
   ];
 
-  final Map<int, List<Map<String, dynamic>>> categoryProducts = {
-    0: [
-      // Semua produk
-      {
-        'name': 'Headphone JBL Back Mercury',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80'
-      },
-      {
-        'name': 'ThinkCentre M720 Desktop',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&q=80'
-      },
-      {
-        'name': 'Lenovo Dekstop',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&q=80'
-      },
-      {
-        'name': 'ThinkCentre M720 Desktop',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&q=80'
-      },
-      {
-        'name': 'Lenovo Dekstop',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&q=80'
-      },
-      {
-        'name': 'Headphone JBL Back Mercury',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80'
-      },
-    ],
-    1: [
-      // Komputer
-      {
-        'name': 'Lenovo Dekstop',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&q=80'
-      },
-      {
-        'name': 'ThinkCentre M720 Desktop',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&q=80'
-      },
-      {
-        'name': 'Lenovo Dekstop',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&q=80'
-      },
-      {
-        'name': 'ThinkCentre M720 Desktop',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&q=80'
-      },
-    ],
-    2: [
-      // Hardware
-      {
-        'name': 'RAM DDR4',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1562976540-1502c2145186?w=400&q=80'
-      },
-      {
-        'name': 'SSD 512GB',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&q=80'
-      },
-    ],
-    3: [
-      // Aksesoris
-      {
-        'name': 'Headphone JBL Back Mercury',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80'
-      },
-      {
-        'name': 'Gaming Mouse',
-        'price': 'Rp. 20.000',
-        'image':
-            'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&q=80'
-      },
-    ],
-  };
+  // Daftar semua produk
+  final List<Map<String, dynamic>> allProducts = [
+    {
+      'name': 'Headphone JBL Black Mercury',
+      'price': '100.000',
+      'image':
+          'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&q=80',
+      'category': 'AKSESORIS'
+    },
+    {
+      'name': 'Lenovo Desktop M720',
+      'price': '15.000.000',
+      'image':
+          'https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&q=80',
+      'category': 'KOMPUTER'
+    },
+    {
+      'name': 'RAM DDR4 16GB',
+      'price': '800.000',
+      'image':
+          'https://images.unsplash.com/photo-1562976540-1502c2145186?w=400&q=80',
+      'category': 'HARDWARE'
+    },
+    {
+      'name': 'Gaming Mouse RGB',
+      'price': '350.000',
+      'image':
+          'https://images.unsplash.com/photo-1527814050087-3793815479db?w=400&q=80',
+      'category': 'AKSESORIS'
+    },
+    {
+      'name': 'SSD 1TB Samsung',
+      'price': '1.500.000',
+      'image':
+          'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400&q=80',
+      'category': 'HARDWARE'
+    },
+    {
+      'name': 'HP Desktop Pro',
+      'price': '12.000.000',
+      'image':
+          'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=400&q=80',
+      'category': 'KOMPUTER'
+    }
+  ];
 
   @override
   void initState() {
@@ -224,51 +174,6 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _buildBottomNavigationBar() {
-    return Container(
-      height: 81.h,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
-            spreadRadius: 0,
-            blurRadius: 10.r,
-            offset: const Offset(0, -5),
-          ),
-        ],
-      ),
-      child: BottomNavigationBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: Colors.grey,
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        currentIndex: 0,
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 24.w),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_outlined, size: 24.w),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history, size: 24.w),
-            label: 'History',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline, size: 24.w),
-            label: 'Profile',
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -286,17 +191,35 @@ class _HomeScreenState extends State<HomeScreen>
                       child: TabBarView(
                         controller: _tabController,
                         children: List.generate(categories.length, (pageIndex) {
+                          // Filter produk berdasarkan kategori dan search query
                           final filteredProducts = _searchQuery.isEmpty
-                              ? categoryProducts[pageIndex] ?? []
-                              : (categoryProducts[pageIndex] ?? [])
-                                  .where((product) {
+                              ? (pageIndex == 0
+                                  ? allProducts // Tampilkan semua produk jika index 0 (Semua)
+                                  : allProducts
+                                      .where((product) =>
+                                          product['category'] ==
+                                          categories[pageIndex]['label']
+                                              .toString()
+                                              .toUpperCase())
+                                      .toList())
+                              : allProducts.where((product) {
                                   final name =
                                       product['name'].toString().toLowerCase();
                                   final price =
                                       product['price'].toString().toLowerCase();
                                   final query = _searchQuery.toLowerCase();
-                                  return name.contains(query) ||
+                                  final matchesSearch = name.contains(query) ||
                                       price.contains(query);
+
+                                  // Jika tab Semua (index 0), tampilkan semua yang sesuai search
+                                  // Jika tidak, filter berdasarkan kategori juga
+                                  return pageIndex == 0
+                                      ? matchesSearch
+                                      : matchesSearch &&
+                                          product['category'] ==
+                                              categories[pageIndex]['label']
+                                                  .toString()
+                                                  .toUpperCase();
                                 }).toList();
 
                           return Padding(
@@ -332,9 +255,8 @@ class _HomeScreenState extends State<HomeScreen>
                                       return ProductCard(
                                         imageUrl: product['image'],
                                         name: product['name'],
-                                        price: product['price'],
-                                        category: categories[pageIndex]
-                                            ['label'],
+                                        price: 'Rp. ${product['price']}',
+                                        category: product['category'],
                                       );
                                     },
                                   ),
@@ -345,7 +267,6 @@ class _HomeScreenState extends State<HomeScreen>
                   ],
                 ),
               ),
-              bottomNavigationBar: _buildBottomNavigationBar(),
             );
           },
         );

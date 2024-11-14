@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../../core/constants/app_sizes.dart';
+import 'package:provider/provider.dart';
+// import '../../../core/constants/app_sizes.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../core/constants/app_colors.dart';
+import '../../../features/cart/providers/cart_provider.dart';
+import '../../../features/cart/models/cart_item.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String name;
@@ -41,6 +44,75 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         statusBarBrightness: Brightness.light,
       ),
     );
+  }
+
+  void _showSuccessDialog() {
+    final cartItem = CartItem(
+      name: widget.name,
+      price: widget.price,
+      imageUrl: widget.imageUrl,
+      category: widget.category,
+    );
+
+    context.read<CartProvider>().addItem(cartItem);
+
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.r),
+          ),
+          child: Container(
+            padding: EdgeInsets.all(20.w),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10.r),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 250.w,
+                  height: 300.w,
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withOpacity(0.2),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    Icons.shopping_cart_checkout,
+                    size: 50.w,
+                    color: AppColors.primary,
+                  ),
+                ),
+                SizedBox(height: 16.h),
+                Text(
+                  'Barang berhasil ditambahkan ke keranjang.',
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.body(context).copyWith(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(height: 8.h),
+                Text(
+                  'Cek menu keranjang untuk melihat pesanan anda',
+                  textAlign: TextAlign.center,
+                  style: AppTextStyles.subtitle(context),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+
+    Future.delayed(const Duration(seconds: 2), () {
+      if (mounted) {
+        Navigator.pop(context); // Tutup dialog
+        Navigator.pop(context); // Kembali ke home screen
+      }
+    });
   }
 
   @override
@@ -116,12 +188,16 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             vertical: 8.h,
                           ),
                           decoration: BoxDecoration(
-                            color: AppColors.inputBackground,
+                            color: const Color(0xFFFCD65B),
                             borderRadius: BorderRadius.circular(20.r),
                           ),
                           child: Text(
-                            widget.category.toUpperCase(),
-                            style: AppTextStyles.subtitle(context),
+                            widget.category[0].toUpperCase() +
+                                widget.category.substring(1).toLowerCase(),
+                            style: AppTextStyles.subtitle(context).copyWith(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                         SizedBox(height: 16.h),
@@ -171,12 +247,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             child: Container(
               padding: EdgeInsets.symmetric(
                 horizontal: 20.w,
-                vertical: 16.h,
+                vertical: 25.h,
               ),
               decoration: BoxDecoration(
                 color: AppColors.bottomBarBackground,
                 borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(30.r),
+                  top: Radius.circular(10.r),
                 ),
               ),
               child: Row(
@@ -190,32 +266,35 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         'HARGA',
                         style: AppTextStyles.subtitle(context).copyWith(
                           color: Colors.white,
-                          fontSize: 12.sp,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      SizedBox(height: 4.h),
                       Text(
                         widget.price,
                         style: AppTextStyles.productPrice(context).copyWith(
-                          fontSize: 24.sp,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
                   ),
                   Container(
-                    height: AppSizes.buttonHeight,
+                    height: 45.h,
+                    width: 192.w,
                     decoration: BoxDecoration(
                       color: AppColors.primary,
-                      borderRadius: BorderRadius.circular(AppSizes.radiusXXL),
+                      borderRadius: BorderRadius.circular(
+                          25.r), // Border radius untuk tombol
                     ),
                     child: TextButton(
-                      onPressed: () {},
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.w),
-                        child: Text(
-                          '+ Keranjang',
-                          style: AppTextStyles.buttonText(context),
+                      onPressed: _showSuccessDialog,
+                      child: Text(
+                        '+ Keranjang',
+                        style: AppTextStyles.buttonText(context).copyWith(
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
                         ),
                       ),
                     ),

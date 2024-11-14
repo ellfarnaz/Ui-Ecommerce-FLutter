@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'register_screen.dart';
-import '../../../features/home/screens/home_screen.dart';
 import '../../../shared/widgets/custom_app_bar.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/custom_text_field.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../core/utils/page_transition.dart';
+import '../../../features/main/screens/main_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       SlidePageRoute(
-                        page: const HomeScreen(),
+                        page: const MainScreen(),
                         direction: AxisDirection.left,
                       ),
                     );

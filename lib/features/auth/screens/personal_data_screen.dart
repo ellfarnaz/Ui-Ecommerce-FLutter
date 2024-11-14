@@ -6,7 +6,7 @@ import '../../../core/constants/app_text_styles.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/custom_text_field.dart';
 import '../../../core/utils/page_transition.dart';
-import '../../../features/home/screens/home_screen.dart';
+import '../../../features/main/screens/main_screen.dart';
 
 class PersonalDataScreen extends StatefulWidget {
   const PersonalDataScreen({super.key});
@@ -189,7 +189,7 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                     Navigator.pushAndRemoveUntil(
                       context,
                       SlidePageRoute(
-                        page: const HomeScreen(),
+                        page: const MainScreen(),
                         direction: AxisDirection.left,
                       ),
                       (route) => false,
