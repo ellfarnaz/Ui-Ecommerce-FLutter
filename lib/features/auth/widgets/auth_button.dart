@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/constants/app_sizes.dart';
-import '../../../core/constants/app_text_styles.dart';
 
 class AuthButton extends StatelessWidget {
   final String text;
@@ -30,15 +30,16 @@ class AuthButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppSizes.radiusXXL),
           ),
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.w,
+            vertical: 12.h,
+          ),
         ),
         child: Text(
           text,
-          style: AppTextStyles.getStyle(
-            context,
-            GoogleFonts.poppins(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+          style: GoogleFonts.poppins(
+            fontSize: 16.sp,
+            fontWeight: FontWeight.w600,
           ),
         ),
       ),

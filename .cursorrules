@@ -1,6 +1,6 @@
 [![](/static/hash-2rtjo3l4/img/pub-dev-logo.svg)](/)
 
-# flutter\_screenutil 5.9.3 ![copy "flutter_screenutil: ^5.9.3" to clipboard](/static/hash-2rtjo3l4/img/content-copy-icon.svg) flutter\_screenutil: ^5.9.3 copied to clipboard
+# flutter_screenutil 5.9.3 ![copy "flutter_screenutil: ^5.9.3" to clipboard](/static/hash-2rtjo3l4/img/content-copy-icon.svg) flutter_screenutil: ^5.9.3 copied to clipboard
 
 Published 5 months agoDart 3 compatible• Latest: [5.9.3](/packages/flutter_screenutil "View the latest version of flutter_screenutil") / Prerelease: [6.0.0-alpha.1](/packages/flutter_screenutil/versions/6.0.0-alpha.1 "Visit flutter_screenutil 6.0.0-alpha.1 page")
 
@@ -25,7 +25,7 @@ More...
 - [Versions](/packages/flutter_screenutil/versions)
 - [Scores](/packages/flutter_screenutil/score)
 
-# flutter\_screenutil [\#](\#flutter_screenutil)
+# flutter_screenutil [\#](#flutter_screenutil)
 
 [![Flutter Package](https://img.shields.io/pub/v/flutter_screenutil.svg)](https://pub.dev/packages/flutter_screenutil)[![Pub Points](https://img.shields.io/pub/points/flutter_screenutil)](https://pub.dev/packages/flutter_screenutil/score)[![Popularity](https://img.shields.io/pub/popularity/flutter_screenutil)](https://pub.dev/packages/flutter_screenutil/score)[![CodeFactor](https://www.codefactor.io/repository/github/openflutter/flutter_screenutil/badge)](https://www.codefactor.io/repository/github/openflutter/flutter_screenutil)
 
@@ -41,9 +41,9 @@ _Note_: This plugin is still under development, and some APIs might not be avail
 
 [Update log](https://github.com/OpenFlutter/flutter_screenutil/blob/master/CHANGELOG.md)
 
-## Usage [\#](\#usage)
+## Usage [\#](#usage)
 
-### Add dependency [\#](\#add-dependency)
+### Add dependency [\#](#add-dependency)
 
 Please check the latest version before installation.
 If there is any problem with the new version, please use the previous version
@@ -54,12 +54,11 @@ dependencies:
     sdk: flutter
   # add flutter_screenutil
   flutter_screenutil: ^{latest version}
-
 ```
 
 copied to clipboard
 
-### Add the following imports to your Dart code [\#](\#add-the-following-imports-to-your-dart-code)
+### Add the following imports to your Dart code [\#](#add-the-following-imports-to-your-dart-code)
 
 ```dart hljs
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,26 +67,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 copied to clipboard
 
-### Properties [\#](\#properties)
+### Properties [\#](#properties)
 
-| Property | Type | Default Value | Description |
-| --- | --- | --- | --- |
-| designSize | Size | Size(360,690) | The size of the device screen in the design draft, in dp |
-| builder | Function | null | Return widget that uses the library in a property (ex: MaterialApp's theme) |
-| child | Widget | null | A part of builder that its dependencies/properties don't use the library |
-| rebuildFactor | Function | _default_ | Function that take old and new screen metrics and returns whether to rebuild or not when changes. |
-| splitScreenMode | bool | false | support for split screen |
-| minTextAdapt | bool | false | Whether to adapt the text according to the minimum of width and height |
-| context | BuildContext | null | Get physical device data if not provided, by MediaQuery.of(context) |
-| fontSizeResolver | Function | _default_ | Function that specify how font size should be adapted. Default is that font size scale with width of screen. |
-| responsiveWidgets | Iterable | null | List/Set of widget names that should be included in rebuilding tree. (See [How flutter\_screenutil marks a widget needs build](#rebuild-list)) |
-| excludeWidgets | Iterable | null | List/Set of widget names that should be excluded from rebuilding tree. |
-| enableScaleWH | Function | null | Support enable scale width and height. |
-| enableScaleText | Function | null | Support enable scale text. |
+| Property          | Type         | Default Value | Description                                                                                                                                   |
+| ----------------- | ------------ | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| designSize        | Size         | Size(360,690) | The size of the device screen in the design draft, in dp                                                                                      |
+| builder           | Function     | null          | Return widget that uses the library in a property (ex: MaterialApp's theme)                                                                   |
+| child             | Widget       | null          | A part of builder that its dependencies/properties don't use the library                                                                      |
+| rebuildFactor     | Function     | _default_     | Function that take old and new screen metrics and returns whether to rebuild or not when changes.                                             |
+| splitScreenMode   | bool         | false         | support for split screen                                                                                                                      |
+| minTextAdapt      | bool         | false         | Whether to adapt the text according to the minimum of width and height                                                                        |
+| context           | BuildContext | null          | Get physical device data if not provided, by MediaQuery.of(context)                                                                           |
+| fontSizeResolver  | Function     | _default_     | Function that specify how font size should be adapted. Default is that font size scale with width of screen.                                  |
+| responsiveWidgets | Iterable     | null          | List/Set of widget names that should be included in rebuilding tree. (See [How flutter_screenutil marks a widget needs build](#rebuild-list)) |
+| excludeWidgets    | Iterable     | null          | List/Set of widget names that should be excluded from rebuilding tree.                                                                        |
+| enableScaleWH     | Function     | null          | Support enable scale width and height.                                                                                                        |
+| enableScaleText   | Function     | null          | Support enable scale text.                                                                                                                    |
 
 **Note : You must either provide builder, child or both.**
 
-### Rebuild list [\#](\#rebuild-list)
+### Rebuild list [\#](#rebuild-list)
 
 Starting from version 5.9.0, ScreenUtilInit won't rebuild the whole widget tree, instead it will mark widget needs build only if:
 
@@ -98,7 +97,7 @@ Starting from version 5.9.0, ScreenUtilInit won't rebuild the whole widget tree,
 
 If you have a widget that uses the library and doesn't meet these options you can either add `SU` mixin or add widget name in responsiveWidgets list.
 
-### Initialize and set the fit size and font size to scale according to the system's "font size" accessibility option [\#](\#initialize-and-set-the-fit-size-and-font-size-to-scale-according-to-the-systems-font-size-accessibility-option)
+### Initialize and set the fit size and font size to scale according to the system's "font size" accessibility option [\#](#initialize-and-set-the-fit-size-and-font-size-to-scale-according-to-the-systems-font-size-accessibility-option)
 
 Please set the size of the design draft before use, the width and height of the design draft.
 
@@ -227,7 +226,7 @@ copied to clipboard
 
 **Note: calling ScreenUtil.init second time, any non-provided parameter will not be replaced with default value. Use ScreenUtil.configure instead**
 
-### API [\#](\#api)
+### API [\#](#api)
 
 #### Enable or disable scale
 
@@ -446,17 +445,17 @@ copied to clipboard
 
 [widget test](https://github.com/OpenFlutter/flutter_screenutil/issues/115)
 
-### Example [\#](\#example)
+### Example [\#](#example)
 
 [example demo](https://github.com/OpenFlutter/flutter_screenutil/blob/master/example/lib)
 
 To use second method run: `flutter run --dart-define=method=2`
 
-### Effect [\#](\#effect)
+### Effect [\#](#effect)
 
 ![effect](https://github.com/OpenFlutter/flutter_screenutil/raw/master/demo_en.png)![tablet effect](https://github.com/OpenFlutter/flutter_screenutil/raw/master/demo_tablet_en.png)
 
-### Update for Version 5.9.0 (Tests) [\#](\#update-for-version-590-tests)
+### Update for Version 5.9.0 (Tests) [\#](#update-for-version-590-tests)
 
 Reported as bug in [#515](https://github.com/OpenFlutter/flutter_screenutil/issues/515)
 
@@ -524,7 +523,7 @@ A flutter plugin for adapting screen and font size.Guaranteed to look good on di
 
 ### More
 
-[Packages that depend on flutter\_screenutil](/packages?q=dependency%3Aflutter_screenutil)
+[Packages that depend on flutter_screenutil](/packages?q=dependency%3Aflutter_screenutil)
 
 Back
 

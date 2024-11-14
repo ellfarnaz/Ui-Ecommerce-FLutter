@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/constants/app_sizes.dart';
 import '../../../core/constants/app_text_styles.dart';
+import '../../../core/constants/app_colors.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String name;
@@ -32,56 +34,55 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   void initState() {
     super.initState();
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: Color(0xFF181C1D),
-      systemNavigationBarIconBrightness: Brightness.light,
-    ));
-  }
-
-  @override
-  void dispose() {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarBrightness: Brightness.light,
-      statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: Colors.white,
-      systemNavigationBarIconBrightness: Brightness.dark,
-    ));
-    super.dispose();
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
-      extendBodyBehindAppBar: false,
+      extendBodyBehindAppBar: true,
       body: Stack(
         children: [
-          // Main Content
           CustomScrollView(
             slivers: [
-              // Image Section
               SliverAppBar(
                 expandedHeight: MediaQuery.of(context).size.width,
                 pinned: false,
                 floating: false,
                 backgroundColor: Colors.transparent,
                 elevation: 0,
+                systemOverlayStyle: const SystemUiOverlayStyle(
+                  statusBarColor: Colors.transparent,
+                  statusBarIconBrightness: Brightness.dark,
+                  statusBarBrightness: Brightness.light,
+                ),
                 leading: Padding(
-                  padding: const EdgeInsets.only(left: 20.0, top: 20.0),
+                  padding: EdgeInsets.only(left: 20.w, top: 20.h),
                   child: GestureDetector(
                     onTap: () => Navigator.pop(context),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFFFCD65B),
-                        borderRadius: BorderRadius.circular(12),
+                        color: AppColors.primary,
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: const Icon(
                         Icons.arrow_back,
-                        color: Color(0xFF181C1D),
+                        color: AppColors.textDark,
                       ),
                     ),
                   ),
@@ -96,46 +97,39 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                 ),
               ),
-
-              // Content Section
               SliverToBoxAdapter(
                 child: Container(
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(30),
+                      top: Radius.circular(30.r),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: EdgeInsets.all(20.w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Category Tag
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16.w,
+                            vertical: 8.h,
                           ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFFF5F5F5),
-                            borderRadius: BorderRadius.circular(20),
+                            color: AppColors.inputBackground,
+                            borderRadius: BorderRadius.circular(20.r),
                           ),
                           child: Text(
                             widget.category.toUpperCase(),
                             style: AppTextStyles.subtitle(context),
                           ),
                         ),
-                        const SizedBox(height: 16),
-
-                        // Product Name
+                        SizedBox(height: 16.h),
                         Text(
                           widget.name,
                           style: AppTextStyles.productTitle(context),
                         ),
-                        const SizedBox(height: 16),
-
-                        // Description with Read More
+                        SizedBox(height: 16.h),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -147,7 +141,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               style: AppTextStyles.body(context),
                             ),
                             if (!_isExpanded) ...[
-                              const SizedBox(height: 8),
+                              SizedBox(height: 8.h),
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
@@ -162,7 +156,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             ],
                           ],
                         ),
-                        const SizedBox(height: 100),
+                        SizedBox(height: 100.h),
                       ],
                     ),
                   ),
@@ -170,51 +164,59 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ],
           ),
-
-          // Bottom Bar
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-              decoration: const BoxDecoration(
-                color: Color(0xFF181C1D),
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.w,
+                vertical: 16.h,
+              ),
+              decoration: BoxDecoration(
+                color: AppColors.bottomBarBackground,
                 borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(30),
+                  top: Radius.circular(30.r),
                 ),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Price
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
                         'HARGA',
-                        style: AppTextStyles.subtitle(context),
+                        style: AppTextStyles.subtitle(context).copyWith(
+                          color: Colors.white,
+                          fontSize: 12.sp,
+                        ),
                       ),
+                      SizedBox(height: 4.h),
                       Text(
                         widget.price,
-                        style: AppTextStyles.productPrice(context),
+                        style: AppTextStyles.productPrice(context).copyWith(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
-
-                  // Add to Cart Button
                   Container(
                     height: AppSizes.buttonHeight,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFFCD65B),
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.circular(AppSizes.radiusXXL),
                     ),
                     child: TextButton(
                       onPressed: () {},
-                      child: Text(
-                        '+ Keranjang',
-                        style: AppTextStyles.buttonText(context),
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Text(
+                          '+ Keranjang',
+                          style: AppTextStyles.buttonText(context),
+                        ),
                       ),
                     ),
                   ),
@@ -225,5 +227,17 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark,
+        statusBarBrightness: Brightness.light,
+      ),
+    );
+    super.dispose();
   }
 }

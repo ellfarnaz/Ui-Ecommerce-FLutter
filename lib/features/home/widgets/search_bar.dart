@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_sizes.dart';
@@ -36,12 +37,20 @@ class CustomSearchBar extends StatelessWidget {
           hintText: 'Cari di sini',
           hintStyle: GoogleFonts.poppins(
             color: Colors.grey,
-            fontSize: 14,
+            fontSize: 14.sp,
           ),
-          prefixIcon: const Icon(Icons.search, color: Colors.grey),
+          prefixIcon: Icon(
+            Icons.search,
+            color: Colors.grey,
+            size: 24.w,
+          ),
           suffixIcon: controller.text.isNotEmpty
               ? IconButton(
-                  icon: const Icon(Icons.clear, color: Colors.grey),
+                  icon: Icon(
+                    Icons.clear,
+                    color: Colors.grey,
+                    size: 20.w,
+                  ),
                   onPressed: () {
                     controller.clear();
                     onChanged('');
@@ -54,6 +63,14 @@ class CustomSearchBar extends StatelessWidget {
           ),
           filled: true,
           fillColor: AppColors.white,
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 16.w,
+            vertical: 8.h,
+          ),
+        ),
+        style: GoogleFonts.poppins(
+          fontSize: 14.sp,
+          color: AppColors.textDark,
         ),
       ),
     );

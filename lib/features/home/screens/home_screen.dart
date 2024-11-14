@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../widgets/category_item.dart';
 import '../widgets/product_card.dart';
@@ -144,7 +145,11 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _buildHeader() {
     return Padding(
-      padding: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      padding: EdgeInsets.only(
+        left: 20.w,
+        right: 20.w,
+        top: 20.h,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -153,30 +158,24 @@ class _HomeScreenState extends State<HomeScreen>
               children: [
                 TextSpan(
                   text: 'Selamat datang, ',
-                  style: AppTextStyles.getStyle(
-                    context,
-                    GoogleFonts.poppins(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.textDark,
-                    ),
+                  style: GoogleFonts.poppins(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.textDark,
                   ),
                 ),
                 TextSpan(
                   text: 'Ellfarnaz',
-                  style: AppTextStyles.getStyle(
-                    context,
-                    GoogleFonts.poppins(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.textDark,
-                    ),
+                  style: GoogleFonts.poppins(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textDark,
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           CustomSearchBar(
             controller: _searchController,
             onChanged: (value) {
@@ -195,7 +194,7 @@ class _HomeScreenState extends State<HomeScreen>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(20.w),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(
@@ -215,7 +214,7 @@ class _HomeScreenState extends State<HomeScreen>
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 20.0, bottom: 15.0),
+          padding: EdgeInsets.only(left: 20.w, bottom: 15.h),
           child: Text(
             'Produk tersedia',
             style: AppTextStyles.heading(context),
@@ -227,14 +226,14 @@ class _HomeScreenState extends State<HomeScreen>
 
   Widget _buildBottomNavigationBar() {
     return Container(
-      height: 81,
+      height: 81.h,
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.1),
             spreadRadius: 0,
-            blurRadius: 10,
+            blurRadius: 10.r,
             offset: const Offset(0, -5),
           ),
         ],
@@ -248,21 +247,21 @@ class _HomeScreenState extends State<HomeScreen>
         showUnselectedLabels: false,
         showSelectedLabels: false,
         currentIndex: 0,
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, size: 24.w),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_outlined),
+            icon: Icon(Icons.shopping_bag_outlined, size: 24.w),
             label: 'Cart',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.history),
+            icon: Icon(Icons.history, size: 24.w),
             label: 'History',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
+            icon: Icon(Icons.person_outline, size: 24.w),
             label: 'Profile',
           ),
         ],
@@ -301,20 +300,19 @@ class _HomeScreenState extends State<HomeScreen>
                                 }).toList();
 
                           return Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            padding: EdgeInsets.symmetric(horizontal: 20.w),
                             child: filteredProducts.isEmpty
                                 ? Center(
                                     child: Text(
                                       'Produk tidak ditemukan',
                                       style: GoogleFonts.poppins(
-                                        fontSize: 14,
+                                        fontSize: 14.sp,
                                         color: Colors.grey,
                                       ),
                                     ),
                                   )
                                 : GridView.builder(
-                                    padding: const EdgeInsets.only(bottom: 20),
+                                    padding: EdgeInsets.only(bottom: 20.h),
                                     gridDelegate:
                                         SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount:

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../../../core/constants/app_text_styles.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hintText;
@@ -21,32 +20,26 @@ class CustomTextField extends StatelessWidget {
     return TextField(
       controller: controller,
       obscureText: obscureText,
-      style: AppTextStyles.getStyle(
-        context,
-        GoogleFonts.poppins(fontSize: 14),
-      ),
+      style: TextStyle(fontSize: 14.sp),
       decoration: InputDecoration(
         filled: true,
         fillColor: const Color(0xFFF5F5F5),
         hintText: hintText,
-        hintStyle: AppTextStyles.getStyle(
-          context,
-          GoogleFonts.poppins(
-            color: Colors.grey,
-            fontSize: 14,
-          ),
+        hintStyle: TextStyle(
+          color: Colors.grey,
+          fontSize: 14.sp,
         ),
-        prefixIcon: Icon(prefixIcon, color: Colors.grey),
+        prefixIcon: Icon(prefixIcon, color: Colors.grey, size: 24.w),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(15.r),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(15.r),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(15.r),
           borderSide: BorderSide.none,
         ),
       ),

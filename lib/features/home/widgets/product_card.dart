@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../core/constants/app_colors.dart';
-import '../../../core/constants/app_sizes.dart';
-import '../../../core/constants/app_text_styles.dart';
 import '../screens/product_detail_screen.dart';
 
 class ProductCard extends StatelessWidget {
@@ -21,7 +21,6 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final String uniqueTag =
         'product-$name-${DateTime.now().millisecondsSinceEpoch}';
 
@@ -32,61 +31,55 @@ class ProductCard extends StatelessWidget {
         child: Card(
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(AppSizes.radiusL),
+            borderRadius: BorderRadius.circular(15.r),
           ),
-          child: ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: size.height * 0.3,
-              minHeight: size.height * 0.2,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _buildProductImage(),
-                _buildProductInfo(context),
-              ],
-            ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(15.r),
+                  ),
+                  child: CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    placeholder: _buildPlaceholder,
+                    errorWidget: _buildErrorWidget,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(12.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: GoogleFonts.poppins(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppColors.textDark,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      price,
+                      style: GoogleFonts.poppins(
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textDark,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildProductImage() {
-    return Expanded(
-      child: ClipRRect(
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(AppSizes.radiusL),
-        ),
-        child: CachedNetworkImage(
-          imageUrl: imageUrl,
-          fit: BoxFit.cover,
-          width: double.infinity,
-          placeholder: _buildPlaceholder,
-          errorWidget: _buildErrorWidget,
-        ),
-      ),
-    );
-  }
-
-  Widget _buildProductInfo(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(AppSizes.paddingM),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            name,
-            style: AppTextStyles.subtitle(context),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
-          SizedBox(height: AppSizes.paddingXS),
-          Text(
-            price,
-            style: AppTextStyles.subtitle(context),
-          ),
-        ],
       ),
     );
   }
@@ -94,9 +87,14 @@ class ProductCard extends StatelessWidget {
   Widget _buildPlaceholder(BuildContext context, String url) {
     return Container(
       color: Colors.grey[200],
-      child: const Center(
-        child: CircularProgressIndicator(
-          color: AppColors.primary,
+      child: Center(
+        child: SizedBox(
+          width: 24.w,
+          height: 24.w,
+          child: const CircularProgressIndicator(
+            color: AppColors.primary,
+            strokeWidth: 2,
+          ),
         ),
       ),
     );
@@ -108,11 +106,18 @@ class ProductCard extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.error_outline, color: Colors.grey, size: 32),
-          SizedBox(height: AppSizes.paddingS),
-          const Text(
+          Icon(
+            Icons.error_outline,
+            color: Colors.grey,
+            size: 32.w,
+          ),
+          SizedBox(height: 8.h),
+          Text(
             'Gambar tidak tersedia',
-            style: TextStyle(color: Colors.grey, fontSize: 12),
+            style: GoogleFonts.poppins(
+              fontSize: 12.sp,
+              color: Colors.grey,
+            ),
           ),
         ],
       ),

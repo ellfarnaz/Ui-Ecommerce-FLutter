@@ -1,39 +1,34 @@
-import '../utils/size_config.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppSizes {
   // Padding & Margin
-  static double get paddingXS => SizeConfig.getProportionateScreenWidth(4.0);
-  static double get paddingS => SizeConfig.getProportionateScreenWidth(8.0);
-  static double get paddingM => SizeConfig.getProportionateScreenWidth(16.0);
-  static double get paddingL => SizeConfig.getProportionateScreenWidth(24.0);
-  static double get paddingXL => SizeConfig.getProportionateScreenWidth(32.0);
-  static double get paddingXXL => SizeConfig.getProportionateScreenWidth(40.0);
+  static double get paddingXS => 4.w;
+  static double get paddingS => 8.w;
+  static double get paddingM => 16.w;
+  static double get paddingL => 24.w;
+  static double get paddingXL => 32.w;
+  static double get paddingXXL => 40.w;
 
   // Border Radius
-  static double get radiusS => SizeConfig.getProportionateScreenWidth(4.0);
-  static double get radiusM => SizeConfig.getProportionateScreenWidth(8.0);
-  static double get radiusL => SizeConfig.getProportionateScreenWidth(12.0);
-  static double get radiusXL => SizeConfig.getProportionateScreenWidth(16.0);
-  static double get radiusXXL => SizeConfig.getProportionateScreenWidth(20.0);
+  static double get radiusS => 4.r;
+  static double get radiusM => 8.r;
+  static double get radiusL => 12.r;
+  static double get radiusXL => 16.r;
+  static double get radiusXXL => 20.r;
 
   // Button Heights
-  static double get buttonHeight =>
-      SizeConfig.getProportionateScreenHeight(45.0);
-  static double get buttonIconSize =>
-      SizeConfig.getProportionateScreenWidth(24.0);
+  static double get buttonHeight => 45.h;
+  static double get buttonIconSize => 24.w;
 
   // Icon Sizes
-  static double get iconXS => SizeConfig.getProportionateScreenWidth(12.0);
-  static double get iconS => SizeConfig.getProportionateScreenWidth(16.0);
-  static double get iconM => SizeConfig.getProportionateScreenWidth(24.0);
-  static double get iconL => SizeConfig.getProportionateScreenWidth(32.0);
-  static double get iconXL => SizeConfig.getProportionateScreenWidth(48.0);
+  static double get iconXS => 12.w;
+  static double get iconS => 16.w;
+  static double get iconM => 24.w;
+  static double get iconL => 32.w;
+  static double get iconXL => 48.w;
 
   // Container Sizes
-  static double get categoryItemSize =>
-      SizeConfig.getProportionateScreenWidth(65.0);
-  static double get productCardHeight =>
-      SizeConfig.getProportionateScreenHeight(200.0);
-  static double get searchBarHeight =>
-      SizeConfig.getProportionateScreenHeight(50.0);
+  static double get categoryItemSize => 65.w;
+  static double get productCardHeight => 200.h;
+  static double get searchBarHeight => 50.h;
 }
