@@ -45,4 +45,6 @@ class AppTextStyles {
         fontWeight: FontWeight.w600,
         color: Colors.white,
       );
+
+  static price(BuildContext context) {}
 }
