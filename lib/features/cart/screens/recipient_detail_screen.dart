@@ -1,8 +1,10 @@
+import 'package:belajar_fluttetr/core/utils/page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../../../features/auth/widgets/custom_text_field.dart';
+import '../../../features/cart/screens/payment_method_screen.dart';
 
 class RecipientDetailScreen extends StatelessWidget {
   const RecipientDetailScreen({super.key});
@@ -171,7 +173,13 @@ class RecipientDetailScreen extends StatelessWidget {
                             SizedBox(height: 40.h),
                             ElevatedButton(
                               onPressed: () {
-                                // Navigate to next step
+                                Navigator.push(
+                                  context,
+                                  SlidePageRoute(
+                                    page: const PaymentMethodScreen(),
+                                    direction: AxisDirection.left,
+                                  ),
+                                );
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.primary,

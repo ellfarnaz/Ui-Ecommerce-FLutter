@@ -11,11 +11,16 @@ class CartProvider extends ChangeNotifier {
 
   double get totalAmount {
     return _items.fold(0.0, (sum, item) {
-      // Mengkonversi string harga ke double
-      final price = double.tryParse(
-            item.price.replaceAll('Rp. ', '').replaceAll('.', ''),
-          ) ??
-          0.0;
+      // Bersihkan string harga dari 'Rp', titik, dan spasi
+      String cleanPrice = item.price
+          .replaceAll('Rp', '')
+          .replaceAll('.', '')
+          .replaceAll(' ', '');
+
+      // Parse ke double
+      double price = double.tryParse(cleanPrice) ?? 0.0;
+
+      // Kalikan dengan quantity
       return sum + (price * item.quantity);
     });
   }

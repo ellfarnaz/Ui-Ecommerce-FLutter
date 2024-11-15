@@ -15,8 +15,9 @@ class CartItem {
   });
 
   double get numericPrice {
-    String cleanPrice = price.replaceAll(RegExp(r'[^0-9]'), '');
-    return double.parse(cleanPrice);
+    String cleanPrice =
+        price.replaceAll('Rp', '').replaceAll('.', '').replaceAll(' ', '');
+    return double.tryParse(cleanPrice) ?? 0.0;
   }
 
   String _formatNumber(double number) {
