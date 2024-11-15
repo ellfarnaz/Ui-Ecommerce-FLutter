@@ -5,8 +5,10 @@ import 'app_colors.dart';
 
 class AppTextStyles {
   static TextStyle getStyle(BuildContext context, TextStyle style) {
-    return style.copyWith(
+    return GoogleFonts.poppins(
       fontSize: (style.fontSize ?? 14).sp,
+      fontWeight: style.fontWeight,
+      color: style.color,
     );
   }
 

@@ -5,6 +5,8 @@ import '../providers/cart_provider.dart';
 import '../widgets/cart_item_card.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
+import 'delivery_method_screen.dart';
+import '../../../core/utils/page_transition.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -81,7 +83,13 @@ class CartScreen extends StatelessWidget {
                 padding: EdgeInsets.all(20.w),
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle checkout
+                    Navigator.push(
+                      context,
+                      SlidePageRoute(
+                        page: const DeliveryMethodScreen(),
+                        direction: AxisDirection.left,
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
@@ -91,7 +99,7 @@ class CartScreen extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    'Pesan Sekarang',
+                    'Pesan',
                     style: AppTextStyles.buttonText(context).copyWith(
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w600,

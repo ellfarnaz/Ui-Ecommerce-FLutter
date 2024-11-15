@@ -153,11 +153,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       splashFactory: InkRipple.splashFactory,
                       splashColor: Colors.black.withOpacity(0.1),
                       highlightColor: Colors.black.withOpacity(0.05),
-                      onTap: () async {
-                        await Future.delayed(const Duration(milliseconds: 100));
+                      onTap: () {
                         Navigator.pop(context);
                       },
-                      child: Container(
+                      child: SizedBox(
                         width: 40.w,
                         height: 40.w,
                         child: Icon(
