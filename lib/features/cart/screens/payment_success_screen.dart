@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 import 'payment_detail_screen.dart';
+import '../../../core/utils/page_transition.dart';
 
 class PaymentSuccessScreen extends StatelessWidget {
   final String selectedBank;
@@ -46,11 +47,12 @@ class PaymentSuccessScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => PaymentDetailScreen(
+                    SlidePageRoute(
+                      page: PaymentDetailScreen(
                         selectedBank: selectedBank,
                         totalAmount: totalAmount,
                       ),
+                      direction: AxisDirection.left,
                     ),
                   );
                 },

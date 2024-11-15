@@ -101,6 +101,11 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
                     decoration: BoxDecoration(
                       color: const Color(0xFFF5F5F5),
                       borderRadius: BorderRadius.circular(8.r),
+                      border: Border.all(
+                        color: Colors
+                            .grey[300]!, // Menambahkan border color grey gelap
+                        width: 1,
+                      ),
                     ),
                     child: Column(
                       children: [
@@ -114,17 +119,17 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
                           ),
                           textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 8.h),
+                        SizedBox(height: 5.h),
                         Text(
                           '23 Jam : 56 Menit : 10 Detik',
                           style: TextStyle(
-                            fontSize: 18.sp,
+                            fontSize: 14.sp,
                             fontFamily: 'Poppins',
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(height: 4.h),
+                        SizedBox(height: 5.h),
                         Text(
                           formatDeadline(),
                           style: TextStyle(
