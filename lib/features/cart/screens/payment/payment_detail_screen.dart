@@ -34,7 +34,8 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
           'Teks berhasil disalin',
           style: TextStyle(
             fontFamily: 'Poppins',
-            fontSize: 12.sp,
+            fontWeight: FontWeight.w600,
+            fontSize: 16.sp,
             color: Colors.black,
           ),
         ),
