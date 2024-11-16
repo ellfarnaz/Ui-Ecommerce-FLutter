@@ -5,8 +5,8 @@ import '../providers/cart_provider.dart';
 import '../widgets/cart_item_card.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
-import 'delivery_method_screen.dart';
 import '../../../core/utils/page_transition.dart';
+import 'payment/delivery_method_screen.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});

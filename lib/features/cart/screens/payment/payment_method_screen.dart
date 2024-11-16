@@ -1,9 +1,10 @@
 import 'package:belajar_fluttetr/core/utils/page_transition.dart';
-import 'package:belajar_fluttetr/features/cart/screens/payment_confirmation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/constants/app_colors.dart';
-import '../../../core/constants/app_text_styles.dart';
+
+import '../../../../core/constants/app_colors.dart';
+import '../../../../core/constants/app_text_styles.dart';
+import 'payment_confirmation_screen.dart';
 
 class PaymentMethodScreen extends StatelessWidget {
   const PaymentMethodScreen({super.key});

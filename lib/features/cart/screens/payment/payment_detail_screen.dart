@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/constants/app_text_styles.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+
+import '../../../../core/constants/app_text_styles.dart';
 
 class PaymentDetailScreen extends StatefulWidget {
   final String selectedBank;

@@ -1,10 +1,11 @@
+import 'package:belajar_fluttetr/core/constants/app_colors.dart';
+import 'package:belajar_fluttetr/features/cart/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../../../core/constants/app_colors.dart';
-import '../../../core/constants/app_text_styles.dart';
-import '../providers/cart_provider.dart';
-import '../widgets/confirmation_dialog.dart';
+
+import '../../../../core/constants/app_text_styles.dart';
+import '../../widgets/confirmation_dialog.dart';
 
 class PaymentConfirmationScreen extends StatelessWidget {
   final String selectedBank;
