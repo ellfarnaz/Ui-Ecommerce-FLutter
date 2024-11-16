@@ -1,3 +1,4 @@
+import 'package:belajar_fluttetr/features/main/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -72,8 +73,13 @@ class PaymentSuccessScreen extends StatelessWidget {
               SizedBox(height: 16.h),
               OutlinedButton(
                 onPressed: () {
-                  // Kembali ke halaman home
-                  Navigator.of(context).popUntil((route) => route.isFirst);
+                  // Kembali ke MainScreen dengan index 0 (HomeScreen)
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (context) => const MainScreen(),
+                    ),
+                    (route) => false,
+                  );
                 },
                 style: OutlinedButton.styleFrom(
                   fixedSize: Size(293.w, 45.h),

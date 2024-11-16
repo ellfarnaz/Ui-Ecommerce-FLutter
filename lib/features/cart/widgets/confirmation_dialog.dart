@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../core/constants/app_text_styles.dart';
 import '../screens/payment/payment_success_screen.dart';
+import 'package:provider/provider.dart';
+import '../providers/cart_provider.dart';
 
 class ConfirmationDialog extends StatefulWidget {
   final String selectedBank;
@@ -24,19 +26,32 @@ class _ConfirmationDialogState extends State<ConfirmationDialog> {
   void _handleConfirmation() async {
     setState(() => _isLoading = true);
 
-    // Simulasi loading
     await Future.delayed(const Duration(seconds: 2));
 
     if (!mounted) return;
 
-    Navigator.of(context).pushAndRemoveUntil(
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    cartProvider.addToHistory(
+      'Menunggu',
+      selectedBank: widget.selectedBank,
+      recipientDetails: {
+        'name': 'Clowd',
+        'address':
+            'Jalan, Griya Anyar, Gg. Bandeng, No. 37, Denpasar Selatan, Denpasar, Bali, 80221',
+      },
+    );
+
+    if (!mounted) return;
+
+    Navigator.pushAndRemoveUntil(
+      context,
       MaterialPageRoute(
         builder: (context) => PaymentSuccessScreen(
           selectedBank: widget.selectedBank,
           totalAmount: widget.totalAmount,
         ),
       ),
-      (route) => false, // Hapus semua route sebelumnya
+      (route) => false,
     );
   }
 

@@ -135,7 +135,7 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
                         Text(
                           formatDeadline(),
                           style: TextStyle(
-                            fontSize: 10.sp,
+                            fontSize: 12.sp,
                             fontFamily: 'Poppins',
                             color: Colors.black54,
                           ),

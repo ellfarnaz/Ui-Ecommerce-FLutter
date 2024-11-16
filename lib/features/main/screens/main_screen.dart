@@ -59,6 +59,8 @@ class _MainScreenState extends State<MainScreen>
 
   @override
   Widget build(BuildContext context) {
+    final bool isIOS = Theme.of(context).platform == TargetPlatform.iOS;
+
     return Scaffold(
       body: TabBarView(
         controller: _tabController,
@@ -66,9 +68,13 @@ class _MainScreenState extends State<MainScreen>
         children: _pages,
       ),
       bottomNavigationBar: Container(
-        height: 65.h,
+        height: isIOS ? 85.h : 65.h,
         decoration: BoxDecoration(
           color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.r),
+            topRight: Radius.circular(20.r),
+          ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
@@ -80,10 +86,36 @@ class _MainScreenState extends State<MainScreen>
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            _buildNavItem(0, Icons.home_outlined, Icons.home),
-            _buildNavItem(1, Icons.shopping_cart_outlined, Icons.shopping_cart),
-            _buildNavItem(2, Icons.history_outlined, Icons.history),
-            _buildNavItem(3, Icons.person_outline, Icons.person),
+            if (isIOS)
+              Padding(
+                padding: EdgeInsets.only(bottom: 20.h),
+                child: _buildNavItem(0, Icons.home_outlined, Icons.home),
+              )
+            else
+              _buildNavItem(0, Icons.home_outlined, Icons.home),
+            if (isIOS)
+              Padding(
+                padding: EdgeInsets.only(bottom: 20.h),
+                child: _buildNavItem(
+                    1, Icons.shopping_cart_outlined, Icons.shopping_cart),
+              )
+            else
+              _buildNavItem(
+                  1, Icons.shopping_cart_outlined, Icons.shopping_cart),
+            if (isIOS)
+              Padding(
+                padding: EdgeInsets.only(bottom: 20.h),
+                child: _buildNavItem(2, Icons.history_outlined, Icons.history),
+              )
+            else
+              _buildNavItem(2, Icons.history_outlined, Icons.history),
+            if (isIOS)
+              Padding(
+                padding: EdgeInsets.only(bottom: 20.h),
+                child: _buildNavItem(3, Icons.person_outline, Icons.person),
+              )
+            else
+              _buildNavItem(3, Icons.person_outline, Icons.person),
           ],
         ),
       ),
