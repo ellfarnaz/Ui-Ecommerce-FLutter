@@ -90,7 +90,7 @@ class PaymentMethodScreen extends StatelessWidget {
                             ),
                             SizedBox(height: 16.h),
                             _buildPaymentOption(context, 'mandiri'),
-                            _buildPaymentOption(context, 'bac'),
+                            _buildPaymentOption(context, 'bca'),
                             _buildPaymentOption(context, 'bni'),
                             _buildPaymentOption(context, 'briva'),
                             _buildPaymentOption(context, 'cimbniaga'),
@@ -113,7 +113,7 @@ class PaymentMethodScreen extends StatelessWidget {
   Widget _buildPaymentOption(BuildContext context, String bankName) {
     final Map<String, String> bankTitles = {
       'mandiri': 'Mandiri Virtual Account',
-      'bac': 'BCA Virtual Account',
+      'bca': 'BCA Virtual Account',
       'bni': 'BNI Virtual Account',
       'briva': 'BRIVA Virtual Account',
       'cimbniaga': 'CIMB NIAGA Virtual Account',

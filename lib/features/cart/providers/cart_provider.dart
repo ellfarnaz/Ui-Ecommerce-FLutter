@@ -99,4 +99,12 @@ class CartProvider extends ChangeNotifier {
     String result = number.toStringAsFixed(0);
     return result.replaceAllMapped(reg, (Match match) => '${match[1]}.');
   }
+
+  void updateTransactionStatus(String id, String newStatus) {
+    final index = _transactionHistory.indexWhere((t) => t['id'] == id);
+    if (index != -1) {
+      _transactionHistory[index]['status'] = newStatus;
+      notifyListeners();
+    }
+  }
 }

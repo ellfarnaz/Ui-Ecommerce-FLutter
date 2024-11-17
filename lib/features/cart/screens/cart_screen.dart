@@ -15,101 +15,146 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: Text(
-          'Keranjang',
-          style: AppTextStyles.heading(context).copyWith(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-      ),
-      body: Consumer<CartProvider>(
-        builder: (context, cartProvider, child) {
-          if (cartProvider.items.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 120.w,
-                    color: AppColors.textSubtitle,
+      body: DefaultTabController(
+        length: 1,
+        child: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverOverlapAbsorber(
+                handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                sliver: SliverAppBar(
+                  backgroundColor: innerBoxIsScrolled
+                      ? const Color(0xFFFFD700)
+                      : Colors.white,
+                  elevation: innerBoxIsScrolled ? 0.5 : 0,
+                  pinned: true,
+                  automaticallyImplyLeading: false,
+                  title: Text(
+                    'Keranjang',
+                    style: AppTextStyles.heading(context).copyWith(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
-                  SizedBox(height: 16.h),
-                  Text(
-                    'Keranjang Kosong',
-                    style: AppTextStyles.heading(context),
-                  ),
-                ],
+                  centerTitle: true,
+                ),
               ),
-            );
-          }
+            ];
+          },
+          body: Consumer<CartProvider>(
+            builder: (context, cartProvider, child) {
+              if (cartProvider.items.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.shopping_cart_outlined,
+                        size: 120.w,
+                        color: AppColors.textSubtitle,
+                      ),
+                      SizedBox(height: 16.h),
+                      Text(
+                        'Keranjang Kosong',
+                        style: AppTextStyles.heading(context),
+                      ),
+                    ],
+                  ),
+                );
+              }
 
-          return Column(
-            children: [
-              // Cart Items
-              Expanded(
-                child: ListView.separated(
-                  padding: EdgeInsets.only(
-                    top: 20.h,
-                    bottom: 20.h,
+              return Stack(
+                children: [
+                  // Cart Items List dengan padding tambahan untuk SliverAppBar
+                  Builder(
+                    builder: (context) {
+                      return CustomScrollView(
+                        slivers: [
+                          SliverOverlapInjector(
+                            handle:
+                                NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                    context),
+                          ),
+                          SliverPadding(
+                            padding:
+                                EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 90.h),
+                            sliver: SliverList(
+                              delegate: SliverChildBuilderDelegate(
+                                (context, index) {
+                                  final item = cartProvider.items[index];
+                                  return Padding(
+                                    padding: EdgeInsets.only(bottom: 24.h),
+                                    child: CartItemCard(
+                                      item: item,
+                                      onUpdateQuantity: (quantity) {
+                                        cartProvider.updateQuantity(
+                                            item, quantity);
+                                      },
+                                      onRemove: () {
+                                        cartProvider.removeItem(item);
+                                      },
+                                    ),
+                                  );
+                                },
+                                childCount: cartProvider.items.length,
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+
+                  // Floating Bottom Button (tetap sama)
+                  Positioned(
                     left: 20.w,
                     right: 20.w,
-                  ),
-                  itemCount: cartProvider.items.length,
-                  separatorBuilder: (context, index) => SizedBox(height: 24.h),
-                  itemBuilder: (context, index) {
-                    final item = cartProvider.items[index];
-                    return CartItemCard(
-                      item: item,
-                      onUpdateQuantity: (quantity) {
-                        cartProvider.updateQuantity(item, quantity);
-                      },
-                      onRemove: () {
-                        cartProvider.removeItem(item);
-                      },
-                    );
-                  },
-                ),
-              ),
-
-              // Bottom Button
-              Padding(
-                padding: EdgeInsets.all(20.w),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      SlidePageRoute(
-                        page: const DeliveryMethodScreen(),
-                        direction: AxisDirection.left,
+                    bottom: 20.h,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            spreadRadius: 0,
+                            blurRadius: 10,
+                            offset: const Offset(0, -2),
+                          ),
+                        ],
                       ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primary,
-                    minimumSize: Size(double.infinity, 50.h),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.r),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            SlidePageRoute(
+                              page: const DeliveryMethodScreen(),
+                              direction: AxisDirection.left,
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primary,
+                          minimumSize: Size(double.infinity, 45.h),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.r),
+                          ),
+                        ),
+                        child: Text(
+                          'Pesan Sekarang',
+                          style: AppTextStyles.buttonText(context).copyWith(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  child: Text(
-                    'Pesan',
-                    style: AppTextStyles.buttonText(context).copyWith(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          );
-        },
+                ],
+              );
+            },
+          ),
+        ),
       ),
     );
   }

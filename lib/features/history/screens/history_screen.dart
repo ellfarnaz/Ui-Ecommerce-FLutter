@@ -61,53 +61,74 @@ class _HistoryScreenState extends State<HistoryScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text(
-          'Riwayat Transaksi',
-          style: AppTextStyles.heading(context).copyWith(
-            fontSize: 18.sp,
-            color: const Color(0xFF2D3250),
-          ),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(left: 20.w, right: 20.w, top: 0.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              TabBar(
-                controller: _tabController,
-                isScrollable: false,
-                labelPadding: EdgeInsets.zero,
-                indicatorSize: TabBarIndicatorSize.label,
-                indicator: const BoxDecoration(),
-                labelColor: Colors.transparent,
-                unselectedLabelColor: Colors.transparent,
-                dividerColor: Colors.transparent,
-                tabs: [
-                  _buildTab('Menunggu', 0),
-                  _buildTab('Diproses', 1),
-                  _buildTab('Selesai', 2),
-                  _buildTab('Dibatalkan', 3),
-                ],
-              ),
-              SizedBox(height: 5.h),
-              Expanded(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    _buildTabContent('Menunggu'),
-                    _buildTabContent('Diproses'),
-                    _buildTabContent('Selesai'),
-                    _buildTabContent('Dibatalkan'),
-                  ],
+      body: DefaultTabController(
+        length: 1,
+        child: NestedScrollView(
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverOverlapAbsorber(
+                handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+                sliver: SliverAppBar(
+                  backgroundColor: Colors.white,
+                  elevation: 0,
+                  pinned: true,
+                  automaticallyImplyLeading: false,
+                  title: Text(
+                    'Riwayat Transaksi',
+                    style: AppTextStyles.heading(context).copyWith(
+                      fontSize: 18.sp,
+                      color: const Color(0xFF2D3250),
+                    ),
+                  ),
+                  centerTitle: true,
+                  bottom: PreferredSize(
+                    preferredSize: Size.fromHeight(50.h),
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15.w),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: innerBoxIsScrolled
+                            ? [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 4),
+                                  spreadRadius: 0,
+                                ),
+                              ]
+                            : null,
+                      ),
+                      child: TabBar(
+                        controller: _tabController,
+                        isScrollable: false,
+                        labelPadding: EdgeInsets.zero,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        indicator: const BoxDecoration(),
+                        labelColor: Colors.transparent,
+                        unselectedLabelColor: Colors.transparent,
+                        dividerColor: Colors.transparent,
+                        tabs: [
+                          _buildTab('Menunggu', 0),
+                          _buildTab('Diproses', 1),
+                          _buildTab('Selesai', 2),
+                          _buildTab('Dibatalkan', 3),
+                        ],
+                      ),
+                    ),
+                  ),
+                  forceElevated: false,
                 ),
               ),
+            ];
+          },
+          body: TabBarView(
+            controller: _tabController,
+            children: [
+              _buildScrollableContent('Menunggu'),
+              _buildScrollableContent('Diproses'),
+              _buildScrollableContent('Selesai'),
+              _buildScrollableContent('Dibatalkan'),
             ],
           ),
         ),
@@ -153,63 +174,115 @@ class _HistoryScreenState extends State<HistoryScreen>
     );
   }
 
-  Widget _buildTabContent(String status) {
-    return Consumer<CartProvider>(
-      builder: (context, cartProvider, child) {
-        final transactions = cartProvider.transactionHistory
-            .where((transaction) =>
-                transaction['status'].toString().toLowerCase() ==
-                status.toLowerCase())
-            .toList();
-
-        if (transactions.isEmpty) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.history,
-                  size: 120.w,
-                  color: AppColors.textSubtitle,
-                ),
-                SizedBox(height: 16.h),
-                Text(
-                  'Belum ada transaksi',
-                  style: AppTextStyles.heading(context),
-                ),
-              ],
+  Widget _buildScrollableContent(String status) {
+    return Builder(
+      builder: (context) {
+        return CustomScrollView(
+          slivers: [
+            SliverOverlapInjector(
+              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
             ),
-          );
-        }
+            SliverPadding(
+              padding: EdgeInsets.fromLTRB(20.w, 5.h, 20.w, 20.h),
+              sliver: SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    Consumer<CartProvider>(
+                      builder: (context, cartProvider, child) {
+                        final transactions = cartProvider.transactionHistory
+                            .where((transaction) =>
+                                transaction['status']
+                                    .toString()
+                                    .toLowerCase() ==
+                                status.toLowerCase())
+                            .toList();
 
-        return ListView.builder(
-          itemCount: transactions.length,
-          itemBuilder: (context, index) {
-            final transaction = transactions[index];
-            return TransactionCard(
-              id: transaction['id'],
-              date: transaction['date'],
-              total: transaction['total'],
-              status: status,
-              statusColor: _getStatusColor(status),
-              onDetailPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TransactionDetailScreen(
-                      id: transaction['id'],
-                      date: transaction['date'],
-                      total: transaction['total'],
-                      status: status,
+                        if (transactions.isEmpty) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SizedBox(
+                                  height: MediaQuery.of(context).size.height *
+                                      0.15),
+                              Icon(
+                                _getIconForStatus(status),
+                                size: 120.w,
+                                color: _getStatusColor(status),
+                              ),
+                              SizedBox(height: 16.h),
+                              Text(
+                                _getMessageForStatus(status),
+                                style: AppTextStyles.heading(context),
+                              ),
+                            ],
+                          );
+                        }
+
+                        return Column(
+                          children: transactions.map((transaction) {
+                            return TransactionCard(
+                              id: transaction['id'],
+                              date: transaction['date'],
+                              total: transaction['total'],
+                              status: status,
+                              statusColor: _getStatusColor(status),
+                              onDetailPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        TransactionDetailScreen(
+                                      id: transaction['id'],
+                                      date: transaction['date'],
+                                      total: transaction['total'],
+                                      status: status,
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          }).toList(),
+                        );
+                      },
                     ),
-                  ),
-                );
-              },
-            );
-          },
+                  ],
+                ),
+              ),
+            ),
+          ],
         );
       },
     );
+  }
+
+  IconData _getIconForStatus(String status) {
+    switch (status.toLowerCase()) {
+      case 'menunggu':
+        return Icons.access_time;
+      case 'diproses':
+        return Icons.sync;
+      case 'selesai':
+        return Icons.check_circle_outline;
+      case 'dibatalkan':
+        return Icons.cancel_outlined;
+      default:
+        return Icons.history;
+    }
+  }
+
+  String _getMessageForStatus(String status) {
+    switch (status.toLowerCase()) {
+      case 'menunggu':
+        return 'Belum ada transaksi menunggu';
+      case 'diproses':
+        return 'Belum ada transaksi diproses';
+      case 'selesai':
+        return 'Belum ada transaksi selesai';
+      case 'dibatalkan':
+        return 'Belum ada transaksi dibatalkan';
+      default:
+        return 'Belum ada transaksi';
+    }
   }
 
   Color _getStatusColor(String status) {
@@ -221,7 +294,7 @@ class _HistoryScreenState extends State<HistoryScreen>
       case 'selesai':
         return Colors.green;
       case 'dibatalkan':
-        return Colors.grey;
+        return Colors.red;
       default:
         return Colors.red;
     }

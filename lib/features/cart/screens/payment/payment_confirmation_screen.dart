@@ -221,7 +221,7 @@ class PaymentConfirmationScreen extends StatelessWidget {
   Widget _buildPaymentMethod(String bankName) {
     final Map<String, String> bankTitles = {
       'mandiri': 'Mandiri Virtual Account',
-      'bac': 'BCA Virtual Account',
+      'bca': 'BCA Virtual Account',
       'bni': 'BNI Virtual Account',
       'briva': 'BRIVA Virtual Account',
       'cimbniaga': 'CIMB NIAGA Virtual Account',

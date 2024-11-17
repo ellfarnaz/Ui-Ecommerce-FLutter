@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import '../../cart/providers/cart_provider.dart';
 import '../../cart/screens/payment/payment_detail_screen.dart';
 import '../../../core/utils/page_transition.dart';
+import '../widgets/cancel_dialog.dart';
 
 class TransactionDetailScreen extends StatelessWidget {
   final String id;
@@ -408,7 +409,10 @@ class TransactionDetailScreen extends StatelessWidget {
         SizedBox(height: 12.h),
         ElevatedButton(
           onPressed: () {
-            // Implementasi pembatalan pembelian
+            showDialog(
+              context: context,
+              builder: (context) => CancelDialog(id: id),
+            );
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFFE31E24),

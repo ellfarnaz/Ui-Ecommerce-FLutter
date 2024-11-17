@@ -8,6 +8,7 @@ import '../../../core/constants/app_text_styles.dart';
 import '../../../core/constants/app_colors.dart';
 import '../../../features/cart/providers/cart_provider.dart';
 import '../../../features/cart/models/cart_item.dart';
+import '../../../features/cart/widgets/add_cart_dialog.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   final String name;
@@ -59,52 +60,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.r),
-          ),
-          child: Container(
-            padding: EdgeInsets.all(20.w),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10.r),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  width: 250.w,
-                  height: 300.w,
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withOpacity(0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(
-                    Icons.shopping_cart_checkout,
-                    size: 50.w,
-                    color: AppColors.primary,
-                  ),
-                ),
-                SizedBox(height: 16.h),
-                Text(
-                  'Barang berhasil ditambahkan ke keranjang.',
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.body(context).copyWith(
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  'Cek menu keranjang untuk melihat pesanan anda',
-                  textAlign: TextAlign.center,
-                  style: AppTextStyles.subtitle(context),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
+      builder: (BuildContext context) => const AddCartDialog(),
     );
 
     Future.delayed(const Duration(seconds: 2), () {

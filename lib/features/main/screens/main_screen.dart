@@ -7,7 +7,12 @@ import '../../../features/profile/screens/profile_screen.dart';
 import '../../../core/constants/app_colors.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final int initialIndex;
+
+  const MainScreen({
+    super.key,
+    this.initialIndex = 0,
+  });
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -16,7 +21,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int _currentIndex = 0;
+  late int _currentIndex;
 
   final List<Widget> _pages = [
     const HomeScreen(),
@@ -28,9 +33,11 @@ class _MainScreenState extends State<MainScreen>
   @override
   void initState() {
     super.initState();
+    _currentIndex = widget.initialIndex;
     _tabController = TabController(
       length: _pages.length,
       vsync: this,
+      initialIndex: widget.initialIndex,
     );
     _tabController.addListener(() {
       if (!_tabController.indexIsChanging) {

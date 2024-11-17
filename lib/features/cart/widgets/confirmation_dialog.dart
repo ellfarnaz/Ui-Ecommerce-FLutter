@@ -125,11 +125,11 @@ class _ConfirmationDialogState extends State<ConfirmationDialog> {
                           height: 45.h,
                           child: Center(
                             child: SizedBox(
-                              width: 45.w,
-                              height: 45.w,
+                              width: 30.w,
+                              height: 30.w,
                               child: CircularProgressIndicator(
                                 color: AppColors.primary,
-                                strokeWidth: 3.w,
+                                strokeWidth: 4.w,
                               ),
                             ),
                           ),

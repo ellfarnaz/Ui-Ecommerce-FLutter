@@ -6,6 +6,7 @@ import 'features/welcome/screens/welcome_screen.dart';
 import 'core/theme/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'features/cart/providers/cart_provider.dart';
+import 'features/main/screens/main_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,6 +41,14 @@ class MyApp extends StatelessWidget {
             title: 'E-Commerce App',
             theme: AppTheme.lightTheme,
             home: const WelcomeScreen(),
+            routes: {
+              '/main': (context) {
+                final args = ModalRoute.of(context)?.settings.arguments
+                    as Map<String, dynamic>?;
+                final initialIndex = args?['initialIndex'] as int? ?? 0;
+                return MainScreen(initialIndex: initialIndex);
+              },
+            },
           );
         },
       ),
