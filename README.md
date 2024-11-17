@@ -1,127 +1,160 @@
 ```markdown
 # UI-Ecommerce-Flutter
 
-<p align="center">
-  <img src="assets/images/logo.png" alt="E-Commerce Logo" width="200"/>
-</p>
+Aplikasi E-Commerce mobile yang dibangun menggunakan Flutter, menyediakan pengalaman belanja yang intuitif dan responsif untuk pengguna.
 
-Aplikasi E-Commerce mobile yang dibangun menggunakan Flutter, menyediakan pengalaman belanja yang modern dan user-friendly. Project ini fokus pada implementasi UI/UX yang clean dan responsive dengan fitur-fitur e-commerce standar industri.
+## Deskripsi
 
-## 📱 Preview Aplikasi
+Aplikasi ini merupakan implementasi UI/UX untuk platform E-Commerce dengan fokus pada pengalaman pengguna yang mulus dan desain yang modern. Dibangun menggunakan Flutter framework untuk mendukung pengembangan cross-platform.
 
-<p align="center">
-  <img src="screenshots/welcome.png" width="200" alt="Welcome Screen"/>
-  <img src="screenshots/home.png" width="200" alt="Home Screen"/>
-  <img src="screenshots/cart.png" width="200" alt="Cart Screen"/>
-  <img src="screenshots/payment.png" width="200" alt="Payment Screen"/>
-</p>
+## Fitur Utama
 
-## ✨ Fitur Utama
+### Autentikasi
 
-### 🏠 Home & Katalog
+- Login
+- Register
+- Forgot Password
+- Email Verification
 
-- Tampilan grid produk yang responsive
-- Kategori produk (Semua, Komputer, Hardware, Aksesoris)
-- Search bar dengan fitur filter
-- Product detail dengan gambar dan deskripsi lengkap
+### Home & Katalog
 
-### 🛒 Shopping Cart
+- Katalog produk dengan kategori
+- Pencarian produk
+- Filter berdasarkan kategori:
+  - Semua Produk
+  - Komputer
+  - Hardware
+  - Aksesoris
+- Detail produk
+- Rekomendasi produk
 
-- Add to cart dengan animasi
-- Adjustment quantity produk
-- Kalkulasi total otomatis
-- Cart summary
+### Keranjang & Checkout
 
-### 💳 Payment System
+- Manajemen keranjang belanja
+- Perhitungan total otomatis
+- Pengaturan kuantitas produk
+- Checkout process
+- Alamat pengiriman
 
-- Multiple payment methods:
+### Sistem Pembayaran
+
+- Multiple metode pembayaran
   - Virtual Account
-  - E-Wallet
   - Bank Transfer
-- Payment confirmation
+  - E-Wallet
+- Detail pembayaran
+- Status transaksi real-time
 - Timer pembayaran
-- Status tracking
+- Konfirmasi pembayaran
 
-### 📋 Order Management
+### Riwayat Transaksi
 
-- Order history
-- Status tracking:
+- List riwayat transaksi
+- Filter berdasarkan status:
   - Menunggu Pembayaran
   - Diproses
   - Dalam Pengiriman
   - Selesai
   - Dibatalkan
 - Detail transaksi
-- Invoice generation
+- Invoice digital
 
-### 👤 User Profile
+### Profil & Pengaturan
 
-- User information management
-- Address management
-- Order history
-- Settings
+- Informasi pengguna
+- Edit profil
+- Pengaturan notifikasi
+- Pengaturan keamanan
+- Alamat tersimpan
+- Logout
 
-## 🛠 Teknologi
+## Teknologi
+
+### Core
 
 - Flutter SDK
 - Dart
-- State Management:
-  - Provider
-  - ChangeNotifier
-- UI Components:
-  - Flutter ScreenUtil
-  - Google Fonts
-  - Cached Network Image
-- Utilities:
-  - Intl
-  - URL Launcher
-  - Share Plus
+- Provider (State Management)
 
-## 🏗 Arsitektur Project
+### UI/UX
+
+- Flutter ScreenUtil
+- Google Fonts
+- Cached Network Image
+- Custom Animations
+- Responsive Layout
+
+### Utilities
+
+- Intl (Internationalization)
+- URL Launcher
+- Share Plus
+- Image Picker
+- Path Provider
+
+## Arsitektur Project
 ```
 
 lib/
 ├── core/
 │ ├── constants/
 │ │ ├── app_colors.dart
-│ │ ├── app_images.dart
-│ │ └── app_sizes.dart
+│ │ ├── app_sizes.dart
+│ │ └── assets_path.dart
 │ ├── theme/
 │ │ └── app_theme.dart
 │ └── utils/
-│ ├── currency_formatter.dart
-│ └── date_formatter.dart
+│ ├── formatters.dart
+│ └── validators.dart
 ├── features/
 │ ├── auth/
-│ │ ├── screens/
 │ │ ├── providers/
-│ │ └── models/
+│ │ ├── screens/
+│ │ └── widgets/
 │ ├── cart/
-│ │ ├── screens/
+│ │ ├── models/
 │ │ ├── providers/
-│ │ └── models/
+│ │ ├── screens/
+│ │ └── widgets/
 │ ├── history/
+│ │ ├── models/
+│ │ ├── screens/
+│ │ └── widgets/
 │ ├── home/
+│ │ ├── models/
+│ │ ├── providers/
+│ │ ├── screens/
+│ │ └── widgets/
 │ ├── main/
-│ ├── profile/
-│ └── welcome/
-└── shared/
-└── widgets/
-├── custom_button.dart
-├── custom_text_field.dart
-└── loading_indicator.dart
+│ │ └── screens/
+│ ├── payment/
+│ │ ├── models/
+│ │ ├── providers/
+│ │ ├── screens/
+│ │ └── widgets/
+│ └── profile/
+│ ├── models/
+│ ├── screens/
+│ └── widgets/
+├── shared/
+│ └── widgets/
+│ ├── buttons/
+│ ├── cards/
+│ ├── inputs/
+│ └── loading/
+└── main.dart
 
 ````
 
-## 🚀 Memulai
+## Instalasi & Setup
 
 ### Prerequisites
-- Flutter SDK (2.5.0 atau lebih tinggi)
-- Dart SDK (2.14.0 atau lebih tinggi)
-- Android Studio/VS Code
-- iOS Simulator/Android Emulator
+- Flutter SDK (versi terbaru)
+- Android Studio / VS Code
+- iOS Simulator / Android Emulator
+- Git
 
-### Instalasi
+### Langkah Instalasi
 
 1. Clone repository
 ```bash
@@ -146,96 +179,130 @@ flutter pub get
 flutter run
 ```
 
-## 📱 Supported Platforms
+### Konfigurasi Development
 
-- Android
-- iOS
-- Web (Responsive)
+1. Debug Mode
 
-## 🎯 State Management
-
-Project ini menggunakan Provider sebagai state management solution. Beberapa keuntungan menggunakan Provider:
-
-- Mudah diimplementasikan
-- Performance yang baik
-- Maintainable code
-- Flutter recommended
-
-Contoh penggunaan Provider:
-
-```dart
-// Define provider
-class CartProvider extends ChangeNotifier {
-  List<CartItem> _items = [];
-
-  void addItem(Product product) {
-    _items.add(CartItem(product: product));
-    notifyListeners();
-  }
-}
-
-// Consume provider
-Consumer<CartProvider>(
-  builder: (context, cart, child) {
-    return Text('${cart.totalItems} items');
-  },
-)
+```bash
+flutter run --debug
 ```
 
-## 🎨 UI Components
+2. Release Mode
 
-Project menggunakan beberapa custom components:
-
-- CustomButton
-- CustomTextField
-- ProductCard
-- LoadingIndicator
-- ErrorDialog
-
-## 📦 Assets
-
-```
-assets/
-├── images/
-│   ├── logo.png
-│   ├── products/
-│   └── icons/
-└── fonts/
+```bash
+flutter run --release
 ```
 
-## 🔧 Configuration
+3. Profile Mode
 
-Konfigurasi aplikasi dapat diubah di:
-
-```dart
-lib/core/constants/app_config.dart
+```bash
+flutter run --profile
 ```
 
-## 🤝 Kontribusi
+## State Management
+
+Project ini menggunakan Provider sebagai state management solution dengan beberapa pertimbangan:
+
+- Mudah dipelajari dan diimplementasikan
+- Official recommendation dari Flutter team
+- Performance yang baik untuk skala medium
+- Mendukung dependency injection
+
+## Coding Standards
+
+### Naming Conventions
+
+- `UpperCamelCase` untuk nama class dan enum
+- `lowerCamelCase` untuk variabel dan fungsi
+- `lowercase_with_underscores` untuk nama file
+
+### File Organization
+
+- Satu widget per file
+- Pemisahan logic dan UI
+- Reusable widgets di folder shared
+- Feature-based folder structure
+
+## Testing
+
+### Unit Testing
+
+```bash
+flutter test test/unit/
+```
+
+### Widget Testing
+
+```bash
+flutter test test/widget/
+```
+
+### Integration Testing
+
+```bash
+flutter test integration_test/
+```
+
+## Build & Release
+
+### Android
+
+```bash
+flutter build apk --release
+```
+
+### iOS
+
+```bash
+flutter build ios --release
+```
+
+## Troubleshooting
+
+### Common Issues
+
+1. Build Failures
+
+   - Clean project: `flutter clean`
+   - Get dependencies: `flutter pub get`
+   - Restart IDE
+
+2. iOS Issues
+
+   - Pod install: `cd ios && pod install`
+   - Update pods: `pod update`
+
+3. Android Issues
+   - Invalidate caches: Android Studio -> File -> Invalidate Caches
+   - Update Gradle
+
+## Kontribusi
 
 1. Fork repository
-2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to branch (`git push origin feature/AmazingFeature`)
-5. Open Pull Request
+2. Buat branch baru (`git checkout -b feature/AmazingFeature`)
+3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
+4. Push ke branch (`git push origin feature/AmazingFeature`)
+5. Buat Pull Request
 
-## 📝 License
+## Versioning
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Kami menggunakan [SemVer](http://semver.org/) untuk versioning.
 
-## 📞 Contact
+## Authors
 
-Your Name - [@yourusername](https://twitter.com/yourusername)
+- **Farel Naufal A** - _Initial work_ - [Ellfarnaz](https://github.com/ellfarnaz)
 
-Project Link: [https://github.com/yourusername/UI-Ecommerce-Flutter](https://github.com/yourusername/UI-Ecommerce-Flutter)
+## License
 
-## 🙏 Acknowledgments
+Project ini dilisensikan di bawah MIT License - lihat file [LICENSE.md](LICENSE.md) untuk detail
 
-- [Flutter](https://flutter.dev)
-- [Provider](https://pub.dev/packages/provider)
-- [Google Fonts](https://pub.dev/packages/google_fonts)
-- [Flutter ScreenUtil](https://pub.dev/packages/flutter_screenutil)
+## Acknowledgments
+
+- Flutter Team
+- Contributor
+- Community Support
 
 ```
+
 
 ```
