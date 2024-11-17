@@ -1,274 +1,247 @@
-```markdown
-# UI-Ecommerce-Flutter
+# 🛍️ UI-Ecommerce-Flutter
 
-Aplikasi E-Commerce mobile yang dibangun menggunakan Flutter, menyediakan pengalaman belanja yang intuitif dan responsif untuk pengguna.
+A mobile E-Commerce application built using Flutter, providing an intuitive and responsive shopping experience for users.
 
-## Deskripsi
+## 📝 Description
 
-Aplikasi ini merupakan implementasi UI/UX untuk platform E-Commerce dengan fokus pada pengalaman pengguna yang mulus dan desain yang modern. Dibangun menggunakan Flutter framework untuk mendukung pengembangan cross-platform.
+This application is a UI/UX implementation for an E-Commerce platform focusing on seamless user experience and modern design. Built using the Flutter framework to support cross-platform development.
 
-## Fitur Utama
+## 📁 Project Structure
 
-### Autentikasi
-
-- Login
-- Register
-- Forgot Password
-- Email Verification
-
-### Home & Katalog
-
-- Katalog produk dengan kategori
-- Pencarian produk
-- Filter berdasarkan kategori:
-  - Semua Produk
-  - Komputer
-  - Hardware
-  - Aksesoris
-- Detail produk
-- Rekomendasi produk
-
-### Keranjang & Checkout
-
-- Manajemen keranjang belanja
-- Perhitungan total otomatis
-- Pengaturan kuantitas produk
-- Checkout process
-- Alamat pengiriman
-
-### Sistem Pembayaran
-
-- Multiple metode pembayaran
-  - Virtual Account
-  - Bank Transfer
-  - E-Wallet
-- Detail pembayaran
-- Status transaksi real-time
-- Timer pembayaran
-- Konfirmasi pembayaran
-
-### Riwayat Transaksi
-
-- List riwayat transaksi
-- Filter berdasarkan status:
-  - Menunggu Pembayaran
-  - Diproses
-  - Dalam Pengiriman
-  - Selesai
-  - Dibatalkan
-- Detail transaksi
-- Invoice digital
-
-### Profil & Pengaturan
-
-- Informasi pengguna
-- Edit profil
-- Pengaturan notifikasi
-- Pengaturan keamanan
-- Alamat tersimpan
-- Logout
-
-## Teknologi
-
-### Core
-
-- Flutter SDK
-- Dart
-- Provider (State Management)
-
-### UI/UX
-
-- Flutter ScreenUtil
-- Google Fonts
-- Cached Network Image
-- Custom Animations
-- Responsive Layout
-
-### Utilities
-
-- Intl (Internationalization)
-- URL Launcher
-- Share Plus
-- Image Picker
-- Path Provider
-
-## Arsitektur Project
 ```
-
 lib/
 ├── core/
-│ ├── constants/
-│ │ ├── app_colors.dart
-│ │ ├── app_sizes.dart
-│ │ └── assets_path.dart
-│ ├── theme/
-│ │ └── app_theme.dart
-│ └── utils/
-│ ├── formatters.dart
-│ └── validators.dart
+│   ├── constants/
+│   │   ├── app_colors.dart
+│   │   ├── app_sizes.dart
+│   │   └── app_text_styles.dart
+│   ├── theme/
+│   │   └── app_theme.dart
+│   └── utils/
+│       ├── page_transition.dart
+│       └── size_config.dart
 ├── features/
-│ ├── auth/
-│ │ ├── providers/
-│ │ ├── screens/
-│ │ └── widgets/
-│ ├── cart/
-│ │ ├── models/
-│ │ ├── providers/
-│ │ ├── screens/
-│ │ └── widgets/
-│ ├── history/
-│ │ ├── models/
-│ │ ├── screens/
-│ │ └── widgets/
-│ ├── home/
-│ │ ├── models/
-│ │ ├── providers/
-│ │ ├── screens/
-│ │ └── widgets/
-│ ├── main/
-│ │ └── screens/
-│ ├── payment/
-│ │ ├── models/
-│ │ ├── providers/
-│ │ ├── screens/
-│ │ └── widgets/
-│ └── profile/
-│ ├── models/
-│ ├── screens/
-│ └── widgets/
+│   ├── auth/
+│   │   ├── providers/
+│   │   ├── screens/
+│   │   └── widgets/
+│   ├── cart/
+│   │   ├── models/
+│   │   ├── providers/
+│   │   ├── screens/
+│   │   └── widgets/
+│   ├── history/
+│   │   ├── models/
+│   │   ├── screens/
+│   │   └── widgets/
+│   ├── home/
+│   │   ├── models/
+│   │   ├── providers/
+│   │   ├── screens/
+│   │   └── widgets/
+│   ├── main/
+│   │   └── screens/
+│   ├── payment/
+│   │   ├── models/
+│   │   ├── providers/
+│   │   ├── screens/
+│   │   └── widgets/
+│   └── profile/
+│       ├── models/
+│       ├── screens/
+│       └── widgets/
 ├── shared/
-│ └── widgets/
-│ ├── buttons/
-│ ├── cards/
-│ ├── inputs/
-│ └── loading/
+│   └── widgets/
+│       ├── buttons/
+│       ├── cards/
+│       ├── inputs/
+│       └── loading/
 └── main.dart
+```
 
-````
+## ⭐ Key Features
 
-## Instalasi & Setup
+### 🔐 Authentication
+- 👤 Login
+- ✍️ Register
+- 🔄 Forgot Password
+- ✉️ Email Verification
 
-### Prerequisites
-- Flutter SDK (versi terbaru)
-- Android Studio / VS Code
-- iOS Simulator / Android Emulator
-- Git
+### 🏠 Home & Catalog
+- 📋 Product catalog with categories
+- 🔍 Product search
+- 🏷️ Filter by categories:
+  - 📦 All Products
+  - 💻 Computers
+  - 🔧 Hardware
+  - 🎮 Accessories
+- 📱 Product details
+- ⭐ Product recommendations
 
-### Langkah Instalasi
+### 🛒 Cart & Checkout
+- 🛍️ Shopping cart management
+- 🧮 Automatic total calculation
+- 📝 Product quantity management
+- 💳 Checkout process
+- 📍 Shipping address
+
+### 💰 Payment System
+- 💳 Multiple payment methods:
+  - 🏦 Virtual Account
+  - 🏧 Bank Transfer
+  - 📱 E-Wallet
+- 📄 Payment details
+- ⏳ Real-time transaction status
+- ⏰ Payment timer
+- ✅ Payment confirmation
+
+### 📋 Transaction History
+- 📑 Transaction history list
+- 🔍 Filter by status:
+  - ⏳ Pending Payment
+  - 🔄 Processing
+  - 🚚 Shipping
+  - ✅ Completed
+  - ❌ Cancelled
+- 📋 Transaction details
+- 📃 Digital invoice
+
+### 👤 Profile & Settings
+- 👤 User information
+- ✏️ Edit profile
+- 🔔 Notification settings
+- 🔒 Security settings
+- 📍 Saved addresses
+- 🚪 Logout
+
+## 🛠️ Technology Stack
+
+### 🎯 Core
+- 📱 Flutter SDK
+- 🎯 Dart
+- 🔄 Provider (State Management)
+
+### 🎨 UI/UX
+- 📐 Flutter ScreenUtil
+- 🔤 Google Fonts
+- 🖼️ Cached Network Image
+- ✨ Custom Animations
+- 📱 Responsive Layout
+
+### 🔧 Utilities
+- 🌐 Intl (Internationalization)
+- 🔗 URL Launcher
+- 📤 Share Plus
+- 📸 Image Picker
+- 📂 Path Provider
+
+## 🚀 Installation & Setup
+
+### ⚙️ Prerequisites
+- 📱 Flutter SDK (latest version)
+- 💻 Android Studio / VS Code
+- 📱 iOS Simulator / Android Emulator
+- 📂 Git
+
+### 📥 Installation Steps
 
 1. Clone repository
 ```bash
-git clone https://github.com/yourusername/UI-Ecommerce-Flutter.git
-````
+git clone https://github.com/ellfarnaz/Ui-Ecommerce-Flutter.git
+```
 
-2. Masuk ke direktori project
-
+2. Navigate to project directory
 ```bash
-cd UI-Ecommerce-Flutter
+cd Ui-Ecommerce-Flutter
 ```
 
 3. Install dependencies
-
 ```bash
 flutter pub get
 ```
 
-4. Jalankan aplikasi
-
+4. Run the application
 ```bash
 flutter run
 ```
 
-### Konfigurasi Development
+### 🔧 Development Configuration
 
 1. Debug Mode
-
 ```bash
 flutter run --debug
 ```
 
 2. Release Mode
-
 ```bash
 flutter run --release
 ```
 
 3. Profile Mode
-
 ```bash
 flutter run --profile
 ```
 
-## State Management
+## 🔄 State Management
 
-Project ini menggunakan Provider sebagai state management solution dengan beberapa pertimbangan:
+This project uses Provider as the state management solution for several reasons:
+- ✨ Easy to learn and implement
+- 👍 Official recommendation from Flutter team
+- ⚡ Good performance for medium-scale applications
+- 🔄 Supports dependency injection
 
-- Mudah dipelajari dan diimplementasikan
-- Official recommendation dari Flutter team
-- Performance yang baik untuk skala medium
-- Mendukung dependency injection
+## 📝 Coding Standards
 
-## Coding Standards
+### 📌 Naming Conventions
+- 📘 `UpperCamelCase` for class and enum names
+- 📗 `lowerCamelCase` for variables and functions
+- 📙 `lowercase_with_underscores` for file names
 
-### Naming Conventions
+### 📂 File Organization
+- 📱 One widget per file
+- 🔄 Separation of logic and UI
+- 🔄 Reusable widgets in shared folder
+- 📁 Feature-based folder structure
 
-- `UpperCamelCase` untuk nama class dan enum
-- `lowerCamelCase` untuk variabel dan fungsi
-- `lowercase_with_underscores` untuk nama file
-
-### File Organization
-
-- Satu widget per file
-- Pemisahan logic dan UI
-- Reusable widgets di folder shared
-- Feature-based folder structure
-
-## Testing
+## 🧪 Testing
 
 ### Unit Testing
-
 ```bash
 flutter test test/unit/
 ```
 
 ### Widget Testing
-
 ```bash
 flutter test test/widget/
 ```
 
 ### Integration Testing
-
 ```bash
 flutter test integration_test/
 ```
 
-## Build & Release
+## 🔨 Build & Release
 
 ### Android
-
 ```bash
 flutter build apk --release
 ```
 
 ### iOS
-
 ```bash
 flutter build ios --release
 ```
 
-## Troubleshooting
+## ❗ Troubleshooting
 
 ### Common Issues
 
 1. Build Failures
-
    - Clean project: `flutter clean`
    - Get dependencies: `flutter pub get`
    - Restart IDE
 
 2. iOS Issues
-
    - Pod install: `cd ios && pod install`
    - Update pods: `pod update`
 
@@ -276,33 +249,35 @@ flutter build ios --release
    - Invalidate caches: Android Studio -> File -> Invalidate Caches
    - Update Gradle
 
-## Kontribusi
+## 🤝 Contributing
 
-1. Fork repository
-2. Buat branch baru (`git checkout -b feature/AmazingFeature`)
-3. Commit perubahan (`git commit -m 'Add some AmazingFeature'`)
-4. Push ke branch (`git push origin feature/AmazingFeature`)
-5. Buat Pull Request
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## Versioning
+## 📌 Versioning
 
-Kami menggunakan [SemVer](http://semver.org/) untuk versioning.
+We use [SemVer](http://semver.org/) for versioning.
 
-## Authors
+## 👨‍💻 Authors
 
 - **Farel Naufal A** - _Initial work_ - [Ellfarnaz](https://github.com/ellfarnaz)
 
-## License
+## 📄 License
 
-Project ini dilisensikan di bawah MIT License - lihat file [LICENSE.md](LICENSE.md) untuk detail
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
-## Acknowledgments
+## 🌟 Badges
+
+![Flutter Version](https://img.shields.io/badge/Flutter-3.0.0-blue)
+![Dart Version](https://img.shields.io/badge/Dart-3.0.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)
+
+## 🙏 Acknowledgments
 
 - Flutter Team
-- Contributor
+- Contributors
 - Community Support
-
-```
-
-
-```
