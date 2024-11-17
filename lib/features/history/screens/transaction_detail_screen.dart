@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 // import '../../../core/constants/app_text_styles.dart';
 import '../../cart/providers/cart_provider.dart';
 import '../../cart/screens/payment/payment_detail_screen.dart';
@@ -33,6 +34,7 @@ class TransactionDetailScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pop(context),
@@ -53,7 +55,7 @@ class TransactionDetailScreen extends StatelessWidget {
           Container(
             width: double.infinity,
             height: double.infinity,
-            color: const Color(0xFFE84C4F),
+            color: const Color.fromARGB(255, 214, 31, 34),
           ),
           Positioned(
             left: 0,
@@ -70,86 +72,91 @@ class TransactionDetailScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.all(20.w),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Center(
-                        child: Column(
-                          children: [
-                            Text.rich(
-                              TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: '# ID Pembelian : ',
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 16.sp,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w700,
+              child: SafeArea(
+                bottom: true,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.all(20.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                          child: Column(
+                            children: [
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: '# ID Pembelian : ',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 18.sp,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
-                                  ),
-                                  TextSpan(
-                                    text: id,
-                                    style: TextStyle(
-                                      color: const Color(0xFFE84C4F),
-                                      fontSize: 16.sp,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w700,
+                                    TextSpan(
+                                      text: id,
+                                      style: TextStyle(
+                                        color: const Color(0xFFE84C4F),
+                                        fontSize: 18.sp,
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w700,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(height: 20.h),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 10.w,
-                                vertical: 5.h,
-                              ),
-                              decoration: ShapeDecoration(
-                                color: const Color(0xFFF5F5F5),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.r),
+                                  ],
                                 ),
                               ),
-                              child: Text(
-                                status.toLowerCase() == 'diproses'
-                                    ? 'Terkonfirmasi'
-                                    : status.toLowerCase() == 'selesai'
-                                        ? 'Selesai'
-                                        : 'Belum dibayar',
-                                style: TextStyle(
-                                  color: const Color(0xFFE84C4F),
-                                  fontSize: 14.sp,
-                                  fontFamily: 'Poppins',
-                                  fontWeight: FontWeight.w500,
+                              SizedBox(height: 20.h),
+                              Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: 10.w,
+                                  vertical: 5.h,
+                                ),
+                                height: 30.h,
+                                decoration: ShapeDecoration(
+                                  color: const Color(0xFFF5F5F5),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                ),
+                                child: Text(
+                                  status.toLowerCase() == 'diproses'
+                                      ? 'Terkonfirmasi'
+                                      : status.toLowerCase() == 'selesai'
+                                          ? 'Selesai'
+                                          : 'Belum dibayar',
+                                  style: TextStyle(
+                                    color: const Color(0xFFE84C4F),
+                                    fontSize: 14.sp,
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 20.h),
-                      _buildSection(
-                        'Metode Pembayaran',
-                        child: _buildPaymentMethod(),
-                      ),
-                      SizedBox(height: 20.h),
-                      _buildSection(
-                        'Detail Pembelian',
-                        child: _buildPurchaseDetails(transaction),
-                      ),
-                      SizedBox(height: 20.h),
-                      _buildSection(
-                        'Ringkasan Pembelian',
-                        child: _buildPurchaseSummary(transaction),
-                      ),
-                      SizedBox(height: 30.h),
-                      _buildActionButtons(context),
-                    ],
+                        SizedBox(height: 20.h),
+                        _buildSection(
+                          'Metode Pembayaran',
+                          child: _buildPaymentMethod(),
+                        ),
+                        SizedBox(height: 20.h),
+                        _buildSection(
+                          'Detail Pembelian',
+                          child: _buildPurchaseDetails(transaction),
+                        ),
+                        SizedBox(height: 20.h),
+                        _buildSection(
+                          'Ringkasan Pembelian',
+                          child: _buildPurchaseSummary(transaction),
+                        ),
+                        SizedBox(height: 30.h),
+                        _buildActionButtons(context),
+                        SizedBox(height: 30.h),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -168,6 +175,10 @@ class TransactionDetailScreen extends StatelessWidget {
         color: Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
+          side: BorderSide(
+            color: Colors.grey[200]!,
+            width: 1,
+          ),
         ),
         shadows: const [
           BoxShadow(
@@ -218,7 +229,7 @@ class TransactionDetailScreen extends StatelessWidget {
             ),
             SizedBox(width: 12.w),
             Text(
-              '${bank.toUpperCase()} Virtual Account',
+              '${bank[0].toUpperCase()}${bank.substring(1).toLowerCase()} Virtual Account',
               style: TextStyle(
                 fontSize: 14.sp,
                 color: Colors.black87,
@@ -259,9 +270,9 @@ class TransactionDetailScreen extends StatelessWidget {
               label,
               style: TextStyle(
                 color: const Color(0xFF3E4462),
-                fontSize: 10.sp,
+                fontSize: 11.sp,
                 fontFamily: 'Poppins',
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -272,7 +283,7 @@ class TransactionDetailScreen extends StatelessWidget {
               textAlign: TextAlign.right,
               style: TextStyle(
                 color: const Color(0xFF7E7E7E),
-                fontSize: 10.sp,
+                fontSize: 11.sp,
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.w600,
               ),
@@ -292,10 +303,9 @@ class TransactionDetailScreen extends StatelessWidget {
               '${item['quantity']}x ${item['name']}',
               item['price'],
             )),
-        _buildItemRow('Biaya pengiriman', 'Rp. 300.000'),
-        SizedBox(height: 12.h),
-        Divider(color: Colors.grey[300]),
-        SizedBox(height: 12.h),
+        _buildItemRow('Biaya pengiriman', 'Rp. 100.000'),
+        SizedBox(height: 8.h),
+        Divider(color: Colors.grey[300], thickness: 1),
         _buildItemRow('Total', total, isTotal: true),
       ],
     );
@@ -304,40 +314,26 @@ class TransactionDetailScreen extends StatelessWidget {
   Widget _buildItemRow(String label, String value, {bool isTotal = false}) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.only(top: isTotal ? 20.h : 5.h),
+      padding: EdgeInsets.only(
+        top: isTotal ? 12.h : 5.h,
+        bottom: isTotal ? 0 : 0,
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (!isTotal)
-                Text(
-                  '1x ',
-                  style: TextStyle(
-                    color: const Color(0xFF3E4462),
-                    fontSize: 10.sp,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              SizedBox(
-                width: 125.w,
-                child: Text(
-                  label,
-                  style: TextStyle(
-                    color: const Color(0xFF3E4462),
-                    fontSize: isTotal ? 14.sp : 10.sp,
-                    fontFamily: 'Poppins',
-                    fontWeight: isTotal ? FontWeight.w700 : FontWeight.w400,
-                  ),
-                ),
+          SizedBox(
+            width: 125.w,
+            child: Text(
+              label,
+              style: TextStyle(
+                color: const Color(0xFF3E4462),
+                fontSize: isTotal ? 14.sp : 12.sp,
+                fontFamily: 'Poppins',
+                fontWeight: isTotal ? FontWeight.w700 : FontWeight.w500,
               ),
-            ],
+            ),
           ),
           const SizedBox(width: 10),
           Text(
@@ -346,7 +342,7 @@ class TransactionDetailScreen extends StatelessWidget {
             style: TextStyle(
               color:
                   isTotal ? const Color(0xFF181C1D) : const Color(0xFF7E7E7E),
-              fontSize: isTotal ? 14.sp : 10.sp,
+              fontSize: isTotal ? 14.sp : 12.sp,
               fontFamily: 'Poppins',
               fontWeight: isTotal ? FontWeight.w700 : FontWeight.w400,
             ),
@@ -386,25 +382,27 @@ class TransactionDetailScreen extends StatelessWidget {
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: Colors.black,
-            minimumSize: Size(double.infinity, 50.h),
+            minimumSize: Size(double.infinity, 45.h),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.r),
+              borderRadius: BorderRadius.circular(10.r),
             ),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Lanjutkan pembayaran',
-                style: TextStyle(
-                  fontSize: 16.sp,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Lanjutkan pembayaran',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              SizedBox(width: 8.w),
-              Icon(Icons.chevron_right, color: Colors.white, size: 24.sp),
-            ],
+                Icon(Icons.arrow_forward_ios, color: Colors.white, size: 18.sp),
+              ],
+            ),
           ),
         ),
         SizedBox(height: 12.h),
@@ -414,15 +412,15 @@ class TransactionDetailScreen extends StatelessWidget {
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color(0xFFE31E24),
-            minimumSize: Size(double.infinity, 50.h),
+            minimumSize: Size(double.infinity, 45.h),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(25.r),
+              borderRadius: BorderRadius.circular(10.r),
             ),
           ),
           child: Text(
             'Batalkan Pembelian',
             style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600,
               color: Colors.white,
             ),
