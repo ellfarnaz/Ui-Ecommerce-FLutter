@@ -1,4 +1,4 @@
-import 'package:belajar_fluttetr/core/utils/page_transition.dart';
+import 'package:ecommerce/core/utils/page_transition.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

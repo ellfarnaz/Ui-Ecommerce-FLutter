@@ -1,4 +1,4 @@
-import 'package:belajar_fluttetr/features/main/screens/main_screen.dart';
+import 'package:ecommerce/features/main/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

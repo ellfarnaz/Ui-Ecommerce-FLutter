@@ -1,4 +1,4 @@
-import 'package:belajar_fluttetr/features/history/screens/transaction_detail_screen.dart';
+import 'package:ecommerce/features/history/screens/transaction_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/constants/app_colors.dart';

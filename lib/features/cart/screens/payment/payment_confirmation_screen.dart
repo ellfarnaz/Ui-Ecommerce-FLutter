@@ -1,5 +1,5 @@
-import 'package:belajar_fluttetr/core/constants/app_colors.dart';
-import 'package:belajar_fluttetr/features/cart/providers/cart_provider.dart';
+import 'package:ecommerce/core/constants/app_colors.dart';
+import 'package:ecommerce/features/cart/providers/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
