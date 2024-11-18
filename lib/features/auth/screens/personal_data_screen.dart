@@ -7,6 +7,7 @@ import '../widgets/auth_button.dart';
 import '../widgets/custom_text_field.dart';
 import '../../../core/utils/page_transition.dart';
 import '../../../features/main/screens/main_screen.dart';
+import 'package:flutter/cupertino.dart';
 
 class PersonalDataScreen extends StatefulWidget {
   const PersonalDataScreen({super.key});
@@ -32,15 +33,12 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.textDark),
-          onPressed: () => Navigator.pop(context),
-        ),
         title: Text(
           'Data pribadi',
           style: AppTextStyles.heading(context),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -75,37 +73,139 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                 // Jenis Kelamin Dropdown
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.symmetric(horizontal: 12.w),
                   decoration: BoxDecoration(
                     color: AppColors.inputBackground,
                     borderRadius: BorderRadius.circular(15.r),
                   ),
-                  child: DropdownButtonHideUnderline(
-                    child: DropdownButton<String>(
-                      value: selectedGender,
-                      hint: Text(
-                        'Jenis kelamin',
-                        style: GoogleFonts.poppins(
-                          color: Colors.grey,
-                          fontSize: 14.sp,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(15.r),
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(
+                              top: Radius.circular(20.r),
+                            ),
+                          ),
+                          builder: (BuildContext context) {
+                            return Container(
+                              height: 200.h,
+                              padding: EdgeInsets.symmetric(horizontal: 20.w),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 15.h),
+                                    decoration: BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: Colors.grey.shade300,
+                                          width: 1,
+                                        ),
+                                      ),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          'Pilih Jenis Kelamin',
+                                          style: AppTextStyles.body(context)
+                                              .copyWith(
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () => Navigator.pop(context),
+                                          child: Text(
+                                            'Selesai',
+                                            style: AppTextStyles.body(context)
+                                                .copyWith(
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ListView(
+                                      children: ['Laki-laki', 'Perempuan']
+                                          .map((String value) {
+                                        return InkWell(
+                                          onTap: () {
+                                            setState(() {
+                                              selectedGender = value;
+                                            });
+                                            Navigator.pop(context);
+                                          },
+                                          child: Container(
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: 15.h,
+                                              horizontal: 10.w,
+                                            ),
+                                            decoration: BoxDecoration(
+                                              border: Border(
+                                                bottom: BorderSide(
+                                                  color: Colors.grey.shade200,
+                                                  width: 1,
+                                                ),
+                                              ),
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  value,
+                                                  style: AppTextStyles.body(
+                                                      context),
+                                                ),
+                                                if (selectedGender == value)
+                                                  Icon(
+                                                    Icons.check,
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                  ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 12.w, vertical: 15.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              selectedGender ?? 'Jenis kelamin',
+                              style: selectedGender == null
+                                  ? GoogleFonts.poppins(
+                                      color: Colors.grey,
+                                      fontSize: 14.sp,
+                                    )
+                                  : AppTextStyles.body(context),
+                            ),
+                            const Icon(Icons.keyboard_arrow_down,
+                                color: Colors.grey),
+                          ],
                         ),
                       ),
-                      items: ['Laki-laki', 'Perempuan']
-                          .map((String value) => DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                  style: AppTextStyles.body(context),
-                                ),
-                              ))
-                          .toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedGender = newValue;
-                        });
-                      },
-                      isExpanded: true,
-                      icon: const Icon(Icons.keyboard_arrow_down),
                     ),
                   ),
                 ),
@@ -147,21 +247,78 @@ class _PersonalDataScreenState extends State<PersonalDataScreen> {
                   ),
                   style: AppTextStyles.body(context),
                   readOnly: true,
-                  onTap: () async {
-                    final DateTime? picked = await showDatePicker(
+                  onTap: () {
+                    showModalBottomSheet(
                       context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
+                      backgroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          top: Radius.circular(20.r),
+                        ),
+                      ),
+                      builder: (BuildContext context) {
+                        return Container(
+                          height: 300.h,
+                          padding: EdgeInsets.symmetric(horizontal: 20.w),
+                          child: Column(
+                            children: [
+                              Container(
+                                padding: EdgeInsets.symmetric(vertical: 15.h),
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Colors.grey.shade300,
+                                      width: 1,
+                                    ),
+                                  ),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      'Pilih Tanggal',
+                                      style:
+                                          AppTextStyles.body(context).copyWith(
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () => Navigator.pop(context),
+                                      child: Text(
+                                        'Selesai',
+                                        style: AppTextStyles.body(context)
+                                            .copyWith(
+                                          color: Theme.of(context).primaryColor,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: CupertinoDatePicker(
+                                  mode: CupertinoDatePickerMode.date,
+                                  initialDateTime: DateTime.now(),
+                                  maximumDate: DateTime.now(),
+                                  minimumYear: 1900,
+                                  maximumYear: DateTime.now().year,
+                                  onDateTimeChanged: (DateTime newDate) {
+                                    setState(() {
+                                      dateController.text =
+                                          "${newDate.day.toString().padLeft(2, '0')}/"
+                                          "${newDate.month.toString().padLeft(2, '0')}/"
+                                          "${newDate.year}";
+                                    });
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
                     );
-                    if (picked != null) {
-                      setState(() {
-                        dateController.text =
-                            "${picked.day.toString().padLeft(2, '0')}/"
-                            "${picked.month.toString().padLeft(2, '0')}/"
-                            "${picked.year}";
-                      });
-                    }
                   },
                 ),
                 SizedBox(height: 20.h),

@@ -1,8 +1,8 @@
+import 'package:ecommerce/core/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'personal_data_screen.dart';
-import '../../../shared/widgets/custom_app_bar.dart';
 import '../widgets/auth_button.dart';
 import '../widgets/custom_text_field.dart';
 import '../../../core/utils/page_transition.dart';
@@ -14,7 +14,16 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Registrasi'),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: Text(
+          'Registrasi',
+          style: AppTextStyles.heading(context),
+        ),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+      ),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
